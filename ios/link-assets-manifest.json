@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/SF-Pro-Display-Bold.otf",
+      "sha1": "33fbe9d59b9b966b7b44cfe9cee0521d95948a36"
+    },
+    {
+      "path": "src/assets/fonts/SF-Pro-Display-Medium.otf",
+      "sha1": "122adb62377e256db0122abefc29295218928fea"
+    },
+    {
+      "path": "src/assets/fonts/SF-Pro-Display-Regular.otf",
+      "sha1": "737ea8c075bdae8392f2c92b17183c270b997f67"
+    }
+  ]
+}

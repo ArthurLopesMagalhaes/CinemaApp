@@ -1,0 +1,31 @@
+import { ActivityIndicator, TouchableOpacityProps } from "react-native";
+import { useTheme } from "styled-components";
+
+import { Text } from "../Text";
+import { Container } from "./styles";
+
+export type ButtonProps = TouchableOpacityProps & {
+  label: string;
+  loading?: boolean;
+};
+
+export const Button = ({ label, loading, ...rest }: ButtonProps) => {
+  const { colors } = useTheme();
+
+  return (
+    <Container
+      {...rest}
+      activeOpacity={0.75}
+      disabled={loading}
+      loading={loading}
+    >
+      {loading ? (
+        <ActivityIndicator size={24} />
+      ) : (
+        <Text weight="Bold" size={14}>
+          {label}
+        </Text>
+      )}
+    </Container>
+  );
+};
