@@ -20,4 +20,5 @@ export const LabelsRow = styled.View`
 
 export const Footer = styled.View`
   padding: 16px;
+  height: 88px;
 `;

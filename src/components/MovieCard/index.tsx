@@ -8,7 +8,16 @@ import { Container, MovieImage, MovieRating } from "./styles";
 const { width: SCREEN_WIDTH } = Dimensions.get("screen");
 const MOVIE_WIDTH = (SCREEN_WIDTH - 52) / 2;
 
-export const MovieCard = () => {
+type MovieCardProps = {
+  data: {
+    id: string;
+    title: string;
+    genre: string;
+    imgURL: string;
+  };
+};
+
+export const MovieCard = ({ data }: MovieCardProps) => {
   const theme = useTheme();
   const navigation = useNavigation();
 
@@ -24,13 +33,19 @@ export const MovieCard = () => {
         style={{ width: MOVIE_WIDTH }}
         resizeMode="cover"
         source={{
-          uri: "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/9EnfMH0nTPCna87Mh3G8Q6W2wze.jpg",
+          uri: data.imgURL,
         }}
       />
-      <Text color={theme.colors.text.main} size={16} weight="Bold">
-        The Batman
+      <Text
+        numberOfLines={1}
+        style={{ width: MOVIE_WIDTH }}
+        color={theme.colors.text.main}
+        size={16}
+        weight="Bold"
+      >
+        {data.title}
       </Text>
-      <Text color={theme.colors.text.muted}>Action</Text>
+      <Text color={theme.colors.text.muted}>{data.genre}</Text>
     </Container>
   );
 };

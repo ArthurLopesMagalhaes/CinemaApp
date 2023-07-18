@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
 import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components";
 
 import BackSvg from "../../assets/back.svg";
@@ -7,6 +7,7 @@ import { Button } from "../../components/Button";
 import { Divider } from "../../components/Divider";
 import { Text } from "../../components/Text";
 import { TopBar } from "../../components/TopBar";
+
 import {
   AboutMovieWrapper,
   Container,

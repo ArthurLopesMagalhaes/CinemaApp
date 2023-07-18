@@ -1,8 +1,10 @@
 import styled from "styled-components/native";
 
-import { SeatProps } from ".";
+type SeatStyleProps = {
+  background?: string;
+};
 
-export const Container = styled.TouchableOpacity<SeatProps>`
+export const Container = styled.TouchableOpacity<SeatStyleProps>`
   width: 32px;
   height: 32px;
   justify-content: center;

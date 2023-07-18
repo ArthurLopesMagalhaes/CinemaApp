@@ -8,6 +8,7 @@ import { theme } from "./src/global/theme";
 import { StackRoutes } from "./src/routes/stack.routes";
 import { StatusBar } from "react-native";
 import { AppRoutes } from "./src/routes";
+import { Loading } from "./src/components/Loading";
 
 function App() {
   return (

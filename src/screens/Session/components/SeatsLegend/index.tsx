@@ -1,8 +1,10 @@
 import { SvgProps } from "react-native-svg";
-import styled from "styled-components/native";
+import { useTheme } from "styled-components";
 
 import { Text } from "../../../../components/Text";
-import { Circle, Container } from "./styles";
+import { Circle, Container, SeatLegendWrapper } from "./styles";
+
+import CloseSvg from "../../../../assets/close.svg";
 
 export type SeatLegendStyleProps = {
   circleBackground: string;
@@ -10,7 +12,7 @@ export type SeatLegendStyleProps = {
   status: "Available" | "Occupied" | "Chosen";
 };
 
-export const SeatLegend = ({
+const SeatLegend = ({
   circleBackground,
   icon: Icon,
   status,
@@ -22,5 +24,27 @@ export const SeatLegend = ({
       </Circle>
       <Text size={12}>{status}</Text>
     </Container>
+  );
+};
+
+export const SeatsLegendBox = () => {
+  const theme = useTheme();
+
+  return (
+    <SeatLegendWrapper>
+      <SeatLegend
+        circleBackground={theme.colors.border.main}
+        status="Available"
+      />
+      <SeatLegend
+        circleBackground={theme.colors.surface.main}
+        icon={CloseSvg}
+        status="Occupied"
+      />
+      <SeatLegend
+        circleBackground={theme.colors.primary.main}
+        status="Chosen"
+      />
+    </SeatLegendWrapper>
   );
 };

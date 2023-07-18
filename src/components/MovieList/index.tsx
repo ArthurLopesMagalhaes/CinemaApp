@@ -13,7 +13,7 @@ export const MovieList = () => {
       columnWrapperStyle={{ justifyContent: "space-between", gap: 20 }}
       showsVerticalScrollIndicator={false}
       ItemSeparatorComponent={() => <Divider top={16} />}
-      renderItem={({ item }) => <MovieCard />}
+      renderItem={({ item }) => <MovieCard data={item} />}
     />
   );
 };

@@ -32,11 +32,3 @@ export const Bottom = styled.View`
   flex: 1;
   background-color: ${(props) => props.theme.colors.background.main};
 `;
-
-export const SeatLegendBox = styled.View`
-  flex-direction: row;
-  justify-content: center;
-  gap: 16px;
-  align-items: center;
-  padding: 16px;
-`;
