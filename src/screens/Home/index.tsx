@@ -2,7 +2,6 @@ import BottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSh
 import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
 import { useRef } from "react";
 
-
 import { Divider } from "../../components/Divider";
 import { Header } from "../../components/Header";
 import { ModalAuth } from "../../components/ModalAuth";

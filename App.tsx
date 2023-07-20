@@ -9,6 +9,7 @@ import { StackRoutes } from "./src/routes/stack.routes";
 import { StatusBar } from "react-native";
 import { AppRoutes } from "./src/routes";
 import { Loading } from "./src/components/Loading";
+import { SessionProvider } from "./src/contexts/SessionContext";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         translucent
         backgroundColor="transparent"
       />
+
       <AppRoutes />
     </ThemeProvider>
   );

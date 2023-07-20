@@ -19,24 +19,30 @@ import {
   TopFixed,
 } from "./styles";
 import { ModalSelectSeat } from "./components/SelectSeatModal";
-import { useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
+import { SessionContext, SessionProvider } from "../../contexts/SessionContext";
+import { useTicketStore } from "../../stores/tickets";
 
 export const Session = () => {
   const theme = useTheme();
   const navigation = useNavigation();
   const ModalSelectSeatRef = useRef<BottomSheet>(null);
+  const { state, dispatch } = useContext(SessionContext);
+  const tickets = useTicketStore((state) => state.tickets);
 
   const openModal = (bottomSheet: React.RefObject<BottomSheetMethods>) => {
     bottomSheet.current?.expand();
-    console.log("first");
   };
+
+  console.log(tickets);
 
   return (
     <Container>
       <TopFixed>
-        <TopBar title="Cinema Tal" subtitle="The Batman" leftIcon={BackSvg} />
+        <TopBar title="Cinema" subtitle="The Batman" leftIcon={BackSvg} />
+
         <DateAndTimeBox>
           <DateAndTimeButton>
             <CalendarSvg />

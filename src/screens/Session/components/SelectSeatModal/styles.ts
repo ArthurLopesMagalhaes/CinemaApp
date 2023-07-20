@@ -11,13 +11,6 @@ export const TextsBox = styled.View`
   align-items: center;
 `;
 
-export const TicketTypeButton = styled.TouchableOpacity`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 8px;
-`;
-
 export const styles = StyleSheet.create({
   backgroundStyle: {
     backgroundColor: "#1D283D",

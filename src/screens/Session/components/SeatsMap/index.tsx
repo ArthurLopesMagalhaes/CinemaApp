@@ -8,6 +8,7 @@ import { useTheme } from "styled-components";
 import ScreenSVG from "../../../../assets/screen.svg";
 import { Divider } from "../../../../components/Divider";
 import { Text } from "../../../../components/Text";
+import { SeatMock } from "../../../../mocks/seats.mock";
 
 type SeatsMapProps = {
   onSeatPress: () => void;
@@ -40,16 +41,15 @@ export const SeatsMap = ({ onSeatPress }: SeatsMapProps) => {
             .fill(0)
             .map((_, i) => (
               <Column key={i}>
-                {Array(NUM_OF_ROWS)
-                  .fill(0)
-                  .map((_, i) => (
-                    <Seat
-                      key={i}
-                      status="Chosen"
-                      number={i}
-                      onPress={onSeatPress}
-                    />
-                  ))}
+                {SeatMock.map((seat, i) => (
+                  <Seat
+                    id={seat.id}
+                    key={i}
+                    status="Chosen"
+                    name={seat.name}
+                    onPress={onSeatPress}
+                  />
+                ))}
               </Column>
             ))}
         </ScrollView>
