@@ -1,3 +1,4 @@
+import { useTheme } from "styled-components";
 import { TopBar } from "../../components/TopBar";
 import {
   ButtonsBox,
@@ -10,14 +11,13 @@ import {
   TicketInfos,
 } from "./styles";
 
-import CloseSvg from "../../assets/close.svg";
-import BackSvg from "../../assets/back.svg";
-import QrCodePng from "../../assets/qrcode.png";
-import { Divider } from "../../components/Divider";
-import { Text } from "../../components/Text";
-import { useTheme } from "styled-components";
-import { TearLine } from "./components/TearLine";
 import { Button } from "../../components/Button";
+import { Divider } from "../../components/Divider";
+import { TearLine } from "./components/TearLine";
+import { Text } from "../../components/Text";
+
+import CloseSvg from "../../assets/close.svg";
+import QrCodePng from "../../assets/qrcode.png";
 
 export const Ticket = () => {
   const theme = useTheme();
@@ -46,7 +46,7 @@ export const Ticket = () => {
           <Text style={{ width: 80 }} color={theme.colors.text.muted}>
             Cinema
           </Text>
-          <Text>Cine da Eskina</Text>
+          <Text>Cine da Damn</Text>
         </LabelsRow>
         <LabelsRow>
           <Text style={{ width: 80 }} color={theme.colors.text.muted}>

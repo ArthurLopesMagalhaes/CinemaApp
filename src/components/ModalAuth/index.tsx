@@ -1,14 +1,14 @@
+import { forwardRef, useMemo, useState } from "react";
 import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetScrollView,
-  BottomSheetTextInput,
 } from "@gorhom/bottom-sheet";
-import { forwardRef, useMemo, useState } from "react";
 import { useTheme } from "styled-components";
 
 import { Button } from "../Button";
 import { Divider } from "../Divider";
 import { Text } from "../Text";
+
 import { ButtonBox, Content, Input, styles } from "./styles";
 
 export const ModalAuth = forwardRef<BottomSheet>((props, ref) => {

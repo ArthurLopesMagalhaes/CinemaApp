@@ -1,25 +1,16 @@
-import { Container } from "./styles";
-
-import LoaderSVG from "../../assets/loader.svg";
+import { useEffect } from "react";
 import Animated, {
   Easing,
-  Keyframe,
   cancelAnimation,
   useAnimatedStyle,
   useSharedValue,
   withRepeat,
   withTiming,
 } from "react-native-reanimated";
-import { useEffect } from "react";
 
-const keyframe = new Keyframe({
-  0: {
-    transform: [{ rotate: "0deg" }],
-  },
-  100: {
-    transform: [{ rotate: "45deg" }],
-  },
-}).duration(2000);
+import { Container } from "./styles";
+
+import LoaderSVG from "../../assets/loader.svg";
 
 export const Loading = () => {
   const rotation = useSharedValue(0);

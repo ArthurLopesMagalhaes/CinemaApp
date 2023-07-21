@@ -1,13 +1,13 @@
+import { useRef } from "react";
 import BottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet";
 import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
-import { useRef } from "react";
+import { Container, Content } from "./styles";
 
 import { Divider } from "../../components/Divider";
 import { Header } from "../../components/Header";
 import { ModalAuth } from "../../components/ModalAuth";
 import { MovieList } from "../../components/MovieList";
 import { Text } from "../../components/Text";
-import { Container, Content } from "./styles";
 
 export const Home = () => {
   const ModalRef = useRef<BottomSheet>(null);

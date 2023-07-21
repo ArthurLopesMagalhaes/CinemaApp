@@ -1,8 +1,9 @@
+import { Dimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Dimensions, Image } from "react-native";
 import { useTheme } from "styled-components";
 
 import { Text } from "../Text";
+
 import { Container, MovieImage, MovieRating } from "./styles";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("screen");

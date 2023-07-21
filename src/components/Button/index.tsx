@@ -2,6 +2,7 @@ import { ActivityIndicator, TouchableOpacityProps } from "react-native";
 import { useTheme } from "styled-components";
 
 import { Text } from "../Text";
+
 import { Container } from "./styles";
 
 export type ButtonProps = TouchableOpacityProps & {
@@ -10,8 +11,6 @@ export type ButtonProps = TouchableOpacityProps & {
 };
 
 export const Button = ({ label, loading, ...rest }: ButtonProps) => {
-  const { colors } = useTheme();
-
   return (
     <Container
       {...rest}

@@ -1,8 +1,9 @@
 import { FlatList } from "react-native";
 
-import { MovieMock } from "../../mocks/movie.mock";
 import { Divider } from "../Divider";
 import { MovieCard } from "../MovieCard";
+
+import { MovieMock } from "../../mocks/movie.mock";
 
 export const MovieList = () => {
   return (

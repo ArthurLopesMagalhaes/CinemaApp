@@ -2,6 +2,7 @@ import { SvgProps } from "react-native-svg";
 import { useTheme } from "styled-components";
 
 import { Text } from "../Text";
+
 import { Container, Left, Medium, Right } from "./styles";
 
 type TopBarProps = {

@@ -1,11 +1,13 @@
 import { Image } from "react-native";
 import { useTheme } from "styled-components";
 
-import LocationSvg from "../../assets/location.svg";
-import Logo from "../../assets/logo.png";
 import { Button } from "../Button";
 import { Text } from "../Text";
+
 import { ButtonBox, Container, ImageBox, LocationBox } from "./styles";
+
+import LocationSvg from "../../assets/location.svg";
+import Logo from "../../assets/logo.png";
 
 type HeaderProps = {
   onButtonPress: () => void;
