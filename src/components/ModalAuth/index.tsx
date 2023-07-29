@@ -5,20 +5,18 @@ import BottomSheet, {
 } from "@gorhom/bottom-sheet";
 import { useTheme } from "styled-components";
 
-import { Button } from "../Button";
-import { Divider } from "../Divider";
-import { Text } from "../Text";
-
-import { ButtonBox, Content, Input, styles } from "./styles";
+import { styles } from "./styles";
+import { useNavigation } from "@react-navigation/native";
+import { SignIn } from "../SignIn";
+import { SignUp } from "../SignUp";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export const ModalAuth = forwardRef<BottomSheet>((props, ref) => {
+  const navigate = useNavigation();
   const theme = useTheme();
   const [loading, setLoading] = useState(false);
   const snapPoints = useMemo(() => ["50%"], []);
-
-  const handleLogin = () => {
-    setLoading(true);
-  };
+  const Stack = createNativeStackNavigator();
 
   return (
     <BottomSheet
@@ -37,23 +35,15 @@ export const ModalAuth = forwardRef<BottomSheet>((props, ref) => {
         />
       )}
     >
-      <BottomSheetScrollView>
-        <Content>
-          <Text weight="Bold" size={24}>
-            Login
-          </Text>
-          <Text color={theme.colors.text.muted} size={16}>
-            Access to purchase tickets
-          </Text>
-          <Input placeholder="Email" />
-          <Divider top={10} />
-          <Input placeholder="Password" />
-          <Divider top={10} />
-          <ButtonBox>
-            <Button label="Continue" onPress={handleLogin} loading={loading} />
-          </ButtonBox>
-        </Content>
-      </BottomSheetScrollView>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          animation: "slide_from_right",
+        }}
+      >
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+      </Stack.Navigator>
     </BottomSheet>
   );
 });

@@ -9,6 +9,8 @@ export const DefineColor = (status: string) => {
       return theme.colors.surface.main;
     case "Chosen":
       return theme.colors.primary.main;
+    case "Empty":
+      return theme.colors.background.main;
 
     default:
       break;

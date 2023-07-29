@@ -15,7 +15,6 @@ export const ModalSelectSeat = forwardRef(
     const theme = useTheme();
     const snapPoints = useMemo(() => ["50%"], []);
 
-    const { state, dispatch } = useContext(SessionContext);
     const addTicket = useTicketStore((state) => state.addTicket);
 
     return (

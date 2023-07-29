@@ -5,6 +5,9 @@ export declare global {
       AboutMovie: undefined;
       Session: undefined;
       Ticket: undefined;
+      SignIn: undefined;
+      SignUp: undefined;
+      Profile: undefined;
     }
   }
 }

@@ -11,9 +11,10 @@ import Logo from "../../assets/logo.png";
 
 type HeaderProps = {
   onButtonPress: () => void;
+  userLogged: boolean;
 };
 
-export const Header = ({ onButtonPress }: HeaderProps) => {
+export const Header = ({ onButtonPress, userLogged }: HeaderProps) => {
   const theme = useTheme();
 
   return (
@@ -26,7 +27,11 @@ export const Header = ({ onButtonPress }: HeaderProps) => {
         <Text>Viçosa - MG</Text>
       </LocationBox>
       <ButtonBox>
-        <Button label="Log In" onPress={onButtonPress} />
+        {/* Use a userPhoto here instead of a button */}
+        <Button
+          label={userLogged ? "Profile" : "Log In"}
+          onPress={onButtonPress}
+        />
       </ButtonBox>
     </Container>
   );

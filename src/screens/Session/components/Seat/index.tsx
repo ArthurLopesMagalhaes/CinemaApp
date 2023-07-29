@@ -10,11 +10,10 @@ export type SeatProps = {
   id: string;
   status: "Available" | "Occupied" | "Chosen";
   name?: string;
-  icon?: React.FC<SvgProps>;
   onPress: () => void;
 };
 
-export const Seat = ({ id, status, name, icon: Icon, onPress }: SeatProps) => {
+export const Seat = ({ id, status, name, onPress }: SeatProps) => {
   return (
     <Container
       background={DefineColor(status)}
@@ -25,7 +24,7 @@ export const Seat = ({ id, status, name, icon: Icon, onPress }: SeatProps) => {
       {status === "Occupied" ? (
         <CloseSVG width={8} />
       ) : (
-        <Text size={12}>{name}</Text>
+        name !== "empty" && <Text size={12}>{name}</Text>
       )}
     </Container>
   );

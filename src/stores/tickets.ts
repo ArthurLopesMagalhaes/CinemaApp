@@ -15,7 +15,7 @@ export const useTicketStore = create<State>((set) => ({
   tickets: [],
   addTicket: (ticket: TicketType) => {
     set((state) => {
-      if (!state.tickets.includes({ id: ticket.id, type: "Adult" })) {
+      if (!state.tickets.some((e) => e.id === ticket.id)) {
         return { tickets: [...state.tickets, ticket] };
       }
       return state;

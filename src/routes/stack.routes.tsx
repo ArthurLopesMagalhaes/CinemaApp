@@ -5,6 +5,7 @@ import { Home } from "../screens/Home";
 import { Session } from "../screens/Session";
 import { Splash } from "../screens/Splash";
 import { Ticket } from "../screens/Ticket";
+import { Profile } from "../screens/Profile";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ export const StackRoutes = () => {
       <Stack.Screen name="AboutMovie" component={AboutMovie} />
       <Stack.Screen name="Session" component={Session} />
       <Stack.Screen name="Ticket" component={Ticket} />
+      <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
   );
 };
