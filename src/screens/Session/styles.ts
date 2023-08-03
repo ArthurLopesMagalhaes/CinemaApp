@@ -8,16 +8,14 @@ export const TopFixed = styled.View`
   background-color: ${(props) => props.theme.colors.surface.glass};
 `;
 
-export const DateAndTimeBox = styled.SafeAreaView`
+export const DateAndTimeBox = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 12px 16px;
   gap: 16px;
 `;
-export const DateAndTimeButton = styled.TouchableOpacity.attrs((props) => ({
-  activeOpacity: 0.6,
-}))`
+export const DateAndTimeButton = styled.TouchableOpacity`
   border-radius: 8px;
   border: 1px solid ${(props) => props.theme.colors.border.main};
   height: 40px;

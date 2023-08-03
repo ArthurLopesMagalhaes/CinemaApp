@@ -8,7 +8,7 @@ import CloseSVG from "../../../../assets/close.svg";
 
 export type SeatProps = {
   id: string;
-  status: "Available" | "Occupied" | "Chosen";
+  status: "available" | "occupied" | "chosen";
   name?: string;
   onPress: () => void;
 };
@@ -18,10 +18,10 @@ export const Seat = ({ id, status, name, onPress }: SeatProps) => {
     <Container
       background={DefineColor(status)}
       onPress={onPress}
-      disabled={status === "Occupied"}
+      disabled={status === "occupied"}
       activeOpacity={0.7}
     >
-      {status === "Occupied" ? (
+      {status === "occupied" ? (
         <CloseSVG width={8} />
       ) : (
         name !== "empty" && <Text size={12}>{name}</Text>

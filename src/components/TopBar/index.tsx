@@ -23,7 +23,7 @@ export const TopBar = ({
     <Container>
       <Left>{LeftIcon && <LeftIcon />}</Left>
       <Medium>
-        <Text size={18} weight="Bold">
+        <Text size={18} weight="Bold" style={{ textAlign: "center" }}>
           {title}
         </Text>
 

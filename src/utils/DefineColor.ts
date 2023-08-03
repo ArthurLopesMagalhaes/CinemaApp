@@ -3,13 +3,13 @@ import { theme } from "../global/theme";
 
 export const DefineColor = (status: string) => {
   switch (status) {
-    case "Available":
+    case "available":
       return theme.colors.surface.deep;
-    case "Occupied":
+    case "occupied":
       return theme.colors.surface.main;
-    case "Chosen":
+    case "chosen":
       return theme.colors.primary.main;
-    case "Empty":
+    case "empty":
       return theme.colors.background.main;
 
     default:

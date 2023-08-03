@@ -5,17 +5,13 @@ import { useTheme } from "styled-components";
 import { Text } from "../Text";
 
 import { Container, MovieImage, MovieRating } from "./styles";
+import { Movie } from "../MovieList";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("screen");
 const MOVIE_WIDTH = (SCREEN_WIDTH - 52) / 2;
 
 type MovieCardProps = {
-  data: {
-    id: string;
-    title: string;
-    genre: string;
-    imgURL: string;
-  };
+  data: Movie;
 };
 
 export const MovieCard = ({ data }: MovieCardProps) => {
@@ -25,7 +21,7 @@ export const MovieCard = ({ data }: MovieCardProps) => {
   return (
     <Container
       activeOpacity={0.75}
-      onPress={() => navigation.navigate("AboutMovie")}
+      onPress={() => navigation.navigate("AboutMovie", { movieId: data.id })}
     >
       <MovieRating>
         <Text>9.1</Text>
@@ -34,7 +30,7 @@ export const MovieCard = ({ data }: MovieCardProps) => {
         style={{ width: MOVIE_WIDTH }}
         resizeMode="cover"
         source={{
-          uri: data.imgURL,
+          uri: data.image_url,
         }}
       />
       <Text
@@ -46,7 +42,7 @@ export const MovieCard = ({ data }: MovieCardProps) => {
       >
         {data.title}
       </Text>
-      <Text color={theme.colors.text.muted}>{data.genre}</Text>
+      <Text color={theme.colors.text.muted}>{data.genres.join(", ")}</Text>
     </Container>
   );
 };

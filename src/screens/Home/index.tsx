@@ -6,17 +6,20 @@ import { Container, Content } from "./styles";
 import { Divider } from "../../components/Divider";
 import { Header } from "../../components/Header";
 import { ModalAuth } from "../../components/ModalAuth";
-import { MovieList } from "../../components/MovieList";
+import { Movie, MovieList } from "../../components/MovieList";
 import { Text } from "../../components/Text";
 import { supabase } from "../../services/supabase";
 import { User } from "@supabase/supabase-js";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { useUserStore } from "../../stores/user";
+import { cineAPI } from "../../services/api";
 
 export const Home = () => {
   const navigation = useNavigation();
   const user = useUserStore((state) => state.user);
   const setUser = useUserStore((state) => state.setUser);
+
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   const ModalRef = useRef<BottomSheet>(null);
 
@@ -36,11 +39,17 @@ export const Home = () => {
     setUser({ email: user?.email, role: user?.role } as User);
   };
 
-  useEffect(
-    useCallback(() => {
-      checkUser();
-    }, [])
-  );
+  const getMovies = async () => {
+    const data = await cineAPI.getMovies();
+    if (data.movies) {
+      setMovies(data.movies);
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+    getMovies();
+  }, []);
 
   return (
     <Container>
@@ -57,7 +66,7 @@ export const Home = () => {
           Now in cinemas
         </Text>
         <Divider top={16} />
-        <MovieList />
+        <MovieList data={movies} />
       </Content>
       <ModalAuth ref={ModalRef} />
     </Container>

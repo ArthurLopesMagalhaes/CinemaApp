@@ -7,6 +7,7 @@ export const Container = styled.View`
   height: 64px;
   padding: 0px 24px;
   margin-top: 40px;
+  gap: 16px;
 `;
 
 export const Left = styled.View`
@@ -14,11 +15,13 @@ export const Left = styled.View`
   height: 24px;
   justify-content: center;
   align-items: center;
+  flex: 1;
 `;
 
 export const Medium = styled.View`
   justify-content: center;
   align-items: center;
+  flex: 8;
 `;
 
 export const Right = styled.View`
@@ -26,4 +29,5 @@ export const Right = styled.View`
   height: 24px;
   justify-content: center;
   align-items: center;
+  flex: 1;
 `;

@@ -9,15 +9,18 @@ import ScreenSVG from "../../../../assets/screen.svg";
 import { Divider } from "../../../../components/Divider";
 import { Text } from "../../../../components/Text";
 import { SeatMock } from "../../../../mocks/seats.mock";
+import { Json } from "../../../../lib/database.types";
 
 type SeatsMapProps = {
+  seatsArrangement: {
+    id: string;
+    name: string;
+    status: "available" | "occupied" | "chosen";
+  }[][];
   onSeatPress: () => void;
 };
 
-const NUM_OF_COLUMNS = 14;
-const NUM_OF_ROWS = 20;
-
-export const SeatsMap = ({ onSeatPress }: SeatsMapProps) => {
+export const SeatsMap = ({ seatsArrangement, onSeatPress }: SeatsMapProps) => {
   const theme = useTheme();
 
   return (
@@ -29,29 +32,31 @@ export const SeatsMap = ({ onSeatPress }: SeatsMapProps) => {
         <ScreenSVG />
         <Divider top={24} />
       </ScreenBox>
-      <ScrollView
-        contentContainerStyle={{
-          padding: 16,
-          width: "100%",
-        }}
-        horizontal
-      >
-        <ScrollView contentContainerStyle={{ rowGap: 8 }}>
-          {SeatMock.map((row, i) => (
-            <Row>
-              {SeatMock[i].map((seat, i) => (
-                <Seat
-                  id={seat.id}
-                  key={i}
-                  status="Chosen"
-                  name={seat.name}
-                  onPress={onSeatPress}
-                />
-              ))}
-            </Row>
-          ))}
+      {seatsArrangement && (
+        <ScrollView
+          contentContainerStyle={{
+            padding: 16,
+            width: "100%",
+          }}
+          horizontal
+        >
+          <ScrollView contentContainerStyle={{ rowGap: 8 }}>
+            {seatsArrangement.map((row, i) => (
+              <Row>
+                {seatsArrangement[i].map((seat, i) => (
+                  <Seat
+                    id={seat.id}
+                    key={i}
+                    status={seat.status}
+                    name={seat.name}
+                    onPress={onSeatPress}
+                  />
+                ))}
+              </Row>
+            ))}
+          </ScrollView>
         </ScrollView>
-      </ScrollView>
+      )}
     </>
   );
 };
