@@ -1,7 +1,7 @@
 import { SeatProps } from "../screens/Session/components/Seat";
 import { theme } from "../global/theme";
 
-export const DefineColor = (status: string) => {
+export const defineColor = (status: string) => {
   switch (status) {
     case "available":
       return theme.colors.surface.deep;

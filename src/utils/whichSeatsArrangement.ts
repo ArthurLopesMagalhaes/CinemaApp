@@ -14,12 +14,12 @@ type SessionsData = {
 
 export const whichSeatsArrangement = (
   sessionsData: SessionsData,
-  selectedDateAndTime: string
+  selectedSessionId: string
 ): seatsArrangement => {
   let selectedSeatsArrangement: seatsArrangement = [];
 
   sessionsData.forEach((session) => {
-    if (session.date_and_time === selectedDateAndTime) {
+    if (session.id === selectedSessionId) {
       return (selectedSeatsArrangement = session.seats_arrangement);
     }
   });

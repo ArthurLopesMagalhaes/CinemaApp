@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type TicketType = {
+export type TicketType = {
   id: string;
   type: "Adult" | "Student";
 };

@@ -10,18 +10,42 @@ import { Divider } from "../../../../components/Divider";
 import { Text } from "../../../../components/Text";
 import { SeatMock } from "../../../../mocks/seats.mock";
 import { Json } from "../../../../lib/database.types";
+import { useTicketStore } from "../../../../stores/tickets";
+import { useCartStore } from "../../../../stores/cart";
 
-type SeatsMapProps = {
-  seatsArrangement: {
-    id: string;
-    name: string;
-    status: "available" | "occupied" | "chosen";
-  }[][];
-  onSeatPress: () => void;
+type Seat = {
+  id: string;
+  name: string;
+  status: "available" | "occupied" | "chosen" | "";
 };
 
-export const SeatsMap = ({ seatsArrangement, onSeatPress }: SeatsMapProps) => {
+type SeatsMapProps = {
+  sessionId: string;
+  seatsArrangement: Seat[][];
+  onSeatPress: (seatId: string) => void;
+};
+
+export const SeatsMap = ({
+  sessionId,
+  seatsArrangement,
+  onSeatPress,
+}: SeatsMapProps) => {
   const theme = useTheme();
+  const tickets = useTicketStore((state) => state.tickets);
+  const cart = useCartStore((state) => state.cart);
+
+  const defineStatus = (seat: Seat) => {
+    let status: Seat["status"] = "";
+    if (sessionId === cart.sessionId) {
+      cart.tickets.forEach((ticket) => {
+        if (ticket.id === seat.id) {
+          return (status = "chosen");
+        }
+      });
+      return status;
+    }
+    return status;
+  };
 
   return (
     <>
@@ -42,12 +66,12 @@ export const SeatsMap = ({ seatsArrangement, onSeatPress }: SeatsMapProps) => {
         >
           <ScrollView contentContainerStyle={{ rowGap: 8 }}>
             {seatsArrangement.map((row, i) => (
-              <Row>
+              <Row key={i}>
                 {seatsArrangement[i].map((seat, i) => (
                   <Seat
                     id={seat.id}
-                    key={i}
-                    status={seat.status}
+                    key={seat.id}
+                    status={defineStatus(seat) || seat.status}
                     name={seat.name}
                     onPress={onSeatPress}
                   />

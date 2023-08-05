@@ -2,9 +2,6 @@ import { useTheme } from "styled-components";
 import { Text } from "../../../../../../components/Text";
 import { Container } from "./styles";
 import { TicketType } from "../../../../../../utils/ticketType";
-import { useContext } from "react";
-import { SessionContext } from "../../../../../../contexts/SessionContext";
-import { Types } from "../../../../../../reducers/ticketReducer";
 
 type TicketTypeButtonProps = {
   type: TicketType;

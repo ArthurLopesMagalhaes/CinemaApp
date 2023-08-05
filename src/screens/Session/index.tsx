@@ -1,10 +1,8 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useTheme } from "styled-components";
 
-import { SessionContext } from "../../contexts/SessionContext";
 import { useTicketStore } from "../../stores/tickets";
 import { cineAPI } from "../../services/api";
 
@@ -30,8 +28,10 @@ import { SelectDateAndTimeModal } from "./components/SelectDateAndTimeModal";
 import { Divider } from "../../components/Divider";
 import { Database } from "../../lib/database.types";
 import { whichSeatsArrangement } from "../../utils/whichSeatsArrangement";
+import { Button } from "react-native";
+import { useCartStore } from "../../stores/cart";
 
-type SessionsData = Database["public"]["Tables"]["sessions"]["Row"];
+export type SessionsData = Database["public"]["Tables"]["sessions"]["Row"];
 
 type RouteParams = {
   movieId: string;
@@ -40,17 +40,34 @@ type RouteParams = {
 export const Session = () => {
   const route = useRoute();
   const navigation = useNavigation();
-
-  const [loading, setLoading] = useState(true);
-  const [sessionsDateAndTime, setSessionsDateAndTime] = useState([""]);
-  const [selectedSession, setSelectedSession] = useState("");
-  const [sessions, setSessions] = useState<SessionsData[]>([]);
   const ModalSelectSeatRef = useRef<BottomSheet>(null);
   const ModalSelectDateAndTimeRef = useRef<BottomSheet>(null);
   const tickets = useTicketStore((state) => state.tickets);
+  const cart = useCartStore((state) => state.cart);
+
+  const [loading, setLoading] = useState(true);
+  const [currentSeat, setCurrentSeat] = useState("");
+  const [selectedSession, setSelectedSession] = useState({
+    date_and_time: "",
+  } as SessionsData);
+  const [sessions, setSessions] = useState<SessionsData[]>([]);
 
   const openModal = (bottomSheet: React.RefObject<BottomSheetMethods>) => {
     bottomSheet.current?.expand();
+  };
+
+  const closeModal = (bottomSheet: React.RefObject<BottomSheetMethods>) => {
+    bottomSheet.current?.close();
+  };
+
+  const onSeatPress = (seatId: string) => {
+    openModal(ModalSelectSeatRef);
+    setCurrentSeat(seatId);
+  };
+
+  const handleSelectDateAndTime = (session: SessionsData) => {
+    setSelectedSession(session);
+    closeModal(ModalSelectDateAndTimeRef);
   };
 
   const { movieId } = route.params as RouteParams;
@@ -60,9 +77,6 @@ export const Session = () => {
     if (response.sessions) {
       setSessions(response.sessions);
       console.log(response.sessions);
-      setSessionsDateAndTime(
-        response.sessions.map((session) => session.date_and_time)
-      );
     }
     setLoading(false);
   };
@@ -77,32 +91,41 @@ export const Session = () => {
     <Container>
       <TopFixed>
         <TopBar title="Cinema" subtitle="The Batman" leftIcon={BackSvg} />
-
+        <Button title="LOG" onPress={() => console.log(cart)} />
         <DateAndTimeBox>
           <DateAndTimeButton
             activeOpacity={0.7}
             onPress={() => openModal(ModalSelectDateAndTimeRef)}
           >
             <CalendarSvg />
-            <Text>{selectedSession.slice(0, 7) || "-- / --"}</Text>
+            <Text>
+              {selectedSession.date_and_time.slice(0, 7) || "-- / --"}
+            </Text>
             <Divider left={50} />
             <ClockSvg />
-            <Text>{selectedSession.slice(11, 16) || "-- : --"}</Text>
+            <Text>
+              {selectedSession.date_and_time.slice(11, 16) || "-- : --"}
+            </Text>
           </DateAndTimeButton>
         </DateAndTimeBox>
       </TopFixed>
       <Bottom>
         <SeatsLegendBox />
         <SeatsMap
-          seatsArrangement={whichSeatsArrangement(sessions, selectedSession)}
-          onSeatPress={() => openModal(ModalSelectSeatRef)}
+          sessionId={selectedSession.id}
+          seatsArrangement={whichSeatsArrangement(sessions, selectedSession.id)}
+          onSeatPress={onSeatPress}
         />
       </Bottom>
-      <ModalSelectSeat ref={ModalSelectSeatRef} />
+      <ModalSelectSeat
+        ref={ModalSelectSeatRef}
+        seat={currentSeat}
+        sessionId={selectedSession.id}
+      />
       <SelectDateAndTimeModal
         ref={ModalSelectDateAndTimeRef}
-        data={sessionsDateAndTime}
-        onPress={setSelectedSession}
+        data={sessions.map((session) => session)}
+        onPress={handleSelectDateAndTime}
       />
     </Container>
   );

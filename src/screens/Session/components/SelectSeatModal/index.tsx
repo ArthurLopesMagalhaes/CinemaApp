@@ -6,16 +6,22 @@ import { Content, TextsBox, styles } from "./styles";
 import { Text } from "../../../../components/Text";
 import { TicketTypeButton } from "./components/TicketTypeButton";
 import { forwardRef, useContext, useMemo } from "react";
-import { SessionContext } from "../../../../contexts/SessionContext";
-import { Types } from "../../../../reducers/ticketReducer";
-import { useTicketStore } from "../../../../stores/tickets";
+
+import { TicketType, useTicketStore } from "../../../../stores/tickets";
+import { useCartStore } from "../../../../stores/cart";
+
+type ModalSelectSeatProps = {
+  seat: string;
+  sessionId: string;
+};
 
 export const ModalSelectSeat = forwardRef(
-  (props, ref: React.Ref<BottomSheet>) => {
+  (props: ModalSelectSeatProps, ref: React.Ref<BottomSheet>) => {
     const theme = useTheme();
     const snapPoints = useMemo(() => ["50%"], []);
 
-    const addTicket = useTicketStore((state) => state.addTicket);
+    // const addTicket = useTicketStore((state) => state.addTicket);
+    const addTicket = useCartStore((state) => state.addTicket);
 
     return (
       <BottomSheet
@@ -40,18 +46,28 @@ export const ModalSelectSeat = forwardRef(
               Select ticket type
             </Text>
             <Text size={16} color={theme.colors.text.muted}>
-              8th row, 7th seat
+              {props.seat}
             </Text>
           </TextsBox>
           <TicketTypeButton
             type="Adult"
             price={80}
-            onPress={() => addTicket({ id: "1", type: "Adult" })}
+            onPress={() =>
+              addTicket(props.sessionId, {
+                id: props.seat,
+                type: "Adult",
+              })
+            }
           />
           <TicketTypeButton
             type="Student"
             price={50}
-            onPress={() => addTicket({ id: "2", type: "Student" })}
+            onPress={() =>
+              addTicket(props.sessionId, {
+                id: props.seat,
+                type: "Student",
+              })
+            }
           />
         </Content>
       </BottomSheet>

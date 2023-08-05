@@ -1,30 +1,34 @@
 import { SvgProps } from "react-native-svg";
 
 import { Text } from "../../../../components/Text";
-import { DefineColor } from "../../../../utils/DefineColor";
+import { defineColor } from "../../../../utils/defineColor";
 import { Container } from "./styles";
 
 import CloseSVG from "../../../../assets/close.svg";
+import { defineDisable } from "../../../../utils/defineDisable";
+import { useCartStore } from "../../../../stores/cart";
 
 export type SeatProps = {
   id: string;
-  status: "available" | "occupied" | "chosen";
+  status: "available" | "occupied" | "chosen" | "empty" | "";
   name?: string;
-  onPress: () => void;
+  onPress: (seatId: string) => void;
 };
 
 export const Seat = ({ id, status, name, onPress }: SeatProps) => {
+  const removeTicket = useCartStore((state) => state.removeTicket);
+
   return (
     <Container
-      background={DefineColor(status)}
-      onPress={onPress}
-      disabled={status === "occupied"}
+      background={defineColor(status)}
+      onPress={status === "chosen" ? () => removeTicket(id) : () => onPress(id)}
+      disabled={defineDisable(status)}
       activeOpacity={0.7}
     >
       {status === "occupied" ? (
         <CloseSVG width={8} />
       ) : (
-        name !== "empty" && <Text size={12}>{name}</Text>
+        status !== "empty" && <Text size={12}>{name}</Text>
       )}
     </Container>
   );

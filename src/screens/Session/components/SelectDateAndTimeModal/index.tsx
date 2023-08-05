@@ -9,10 +9,11 @@ import { Text } from "../../../../components/Text";
 
 import { forwardRef, useMemo } from "react";
 import { formatDate } from "../../../../utils/formatDate";
+import { SessionsData } from "../..";
 
 type Props = {
-  data: string[];
-  onPress: (sessionId: string) => void;
+  data: SessionsData[];
+  onPress: (session: SessionsData) => void;
 };
 
 export const SelectDateAndTimeModal = forwardRef(
@@ -41,9 +42,9 @@ export const SelectDateAndTimeModal = forwardRef(
             Select one session
           </Text>
           <BottomSheetScrollView>
-            {props.data.map((date) => (
-              <DateTimeContainer onPress={() => props.onPress(date)}>
-                <Text>{formatDate(date)}</Text>
+            {props.data.map((session) => (
+              <DateTimeContainer onPress={() => props.onPress(session)}>
+                <Text>{formatDate(session.date_and_time)}</Text>
               </DateTimeContainer>
             ))}
           </BottomSheetScrollView>
