@@ -5,7 +5,6 @@ export const ScreenBox = styled.View`
   align-items: center;
 `;
 
-export const Row = styled.View`
-  flex-direction: row;
+export const Column = styled.View`
   gap: 8px;
 `;

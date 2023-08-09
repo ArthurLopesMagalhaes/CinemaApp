@@ -19,6 +19,7 @@ import ClockSvg from "../../assets/clock.svg";
 
 import {
   Bottom,
+  ButtonWrapper,
   Container,
   DateAndTimeBox,
   DateAndTimeButton,
@@ -28,8 +29,9 @@ import { SelectDateAndTimeModal } from "./components/SelectDateAndTimeModal";
 import { Divider } from "../../components/Divider";
 import { Database } from "../../lib/database.types";
 import { whichSeatsArrangement } from "../../utils/whichSeatsArrangement";
-import { Button } from "react-native";
+
 import { useCartStore } from "../../stores/cart";
+import { Button } from "../../components/Button";
 
 export type SessionsData = Database["public"]["Tables"]["sessions"]["Row"];
 
@@ -91,7 +93,7 @@ export const Session = () => {
     <Container>
       <TopFixed>
         <TopBar title="Cinema" subtitle="The Batman" leftIcon={BackSvg} />
-        <Button title="LOG" onPress={() => console.log(cart)} />
+
         <DateAndTimeBox>
           <DateAndTimeButton
             activeOpacity={0.7}
@@ -117,6 +119,14 @@ export const Session = () => {
           onSeatPress={onSeatPress}
         />
       </Bottom>
+      {cart.tickets.length > 0 && (
+        <ButtonWrapper>
+          <Button
+            label="Buy tickets"
+            onPress={() => navigation.navigate("Cart")}
+          />
+        </ButtonWrapper>
+      )}
       <ModalSelectSeat
         ref={ModalSelectSeatRef}
         seat={currentSeat}

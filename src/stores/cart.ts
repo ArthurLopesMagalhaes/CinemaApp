@@ -20,7 +20,7 @@ export const useCartStore = create<State>((set) => ({
   cart: { sessionId: "", tickets: [] },
   addTicket: (sessionId: string, ticket: TicketType) => {
     set((state) => {
-      if (state.cart.sessionId === "") {
+      if (state.cart.sessionId === "" || state.cart.sessionId !== sessionId) {
         return { cart: { sessionId, tickets: [ticket] } };
       }
       if (

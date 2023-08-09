@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Row, ScreenBox } from "./styles";
+import { Column, ScreenBox } from "./styles";
 import { ScrollView, View } from "react-native";
 import { Seat } from "../Seat";
 import { useNavigation } from "@react-navigation/native";
@@ -62,11 +62,10 @@ export const SeatsMap = ({
             padding: 16,
             width: "100%",
           }}
-          horizontal
         >
-          <ScrollView contentContainerStyle={{ rowGap: 8 }}>
+          <ScrollView contentContainerStyle={{ gap: 8 }} horizontal>
             {seatsArrangement.map((row, i) => (
-              <Row key={i}>
+              <Column key={i}>
                 {seatsArrangement[i].map((seat, i) => (
                   <Seat
                     id={seat.id}
@@ -76,7 +75,7 @@ export const SeatsMap = ({
                     onPress={onSeatPress}
                   />
                 ))}
-              </Row>
+              </Column>
             ))}
           </ScrollView>
         </ScrollView>

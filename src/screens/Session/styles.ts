@@ -30,3 +30,7 @@ export const Bottom = styled.View`
   flex: 1;
   background-color: ${(props) => props.theme.colors.background.main};
 `;
+export const ButtonWrapper = styled.View`
+  flex-direction: row;
+  padding: 0px 16px 16px;
+`;
