@@ -36,5 +36,6 @@ export const cineAPI = {
       })
       .eq("id", sessionId)
       .select();
+    return { data, error };
   },
 };

@@ -32,6 +32,8 @@ import { whichSeatsArrangement } from "../../utils/whichSeatsArrangement";
 
 import { useCartStore } from "../../stores/cart";
 import { Button } from "../../components/Button";
+import { getUpdatedSeats } from "../../utils/getUpdatedSeats";
+import { getTicketsIdFromCart } from "../../utils/getTicketsIdFromCart";
 
 export type SessionsData = Database["public"]["Tables"]["sessions"]["Row"];
 
@@ -46,6 +48,7 @@ export const Session = () => {
   const ModalSelectDateAndTimeRef = useRef<BottomSheet>(null);
   const tickets = useTicketStore((state) => state.tickets);
   const cart = useCartStore((state) => state.cart);
+  const clearCart = useCartStore((state) => state.clearCart);
 
   const [loading, setLoading] = useState(true);
   const [currentSeat, setCurrentSeat] = useState("");
@@ -78,9 +81,25 @@ export const Session = () => {
     const response = await cineAPI.getSession(movieId);
     if (response.sessions) {
       setSessions(response.sessions);
-      console.log(response.sessions);
     }
     setLoading(false);
+  };
+
+  const updateSession = async () => {
+    const newSeatsArrangement = getUpdatedSeats(
+      [...selectedSession.seats_arrangement],
+      getTicketsIdFromCart(cart.tickets)
+    );
+    const response = await cineAPI.updateSession(
+      selectedSession.id,
+      newSeatsArrangement
+    );
+    console.log(response);
+    clearCart();
+  };
+
+  const goToCheckout = () => {
+    navigation.navigate("Cart");
   };
 
   useEffect(() => {
@@ -112,6 +131,7 @@ export const Session = () => {
         </DateAndTimeBox>
       </TopFixed>
       <Bottom>
+        <Button label="LOG" onPress={() => console.log(cart.tickets)} />
         <SeatsLegendBox />
         <SeatsMap
           sessionId={selectedSession.id}
@@ -121,10 +141,7 @@ export const Session = () => {
       </Bottom>
       {cart.tickets.length > 0 && (
         <ButtonWrapper>
-          <Button
-            label="Buy tickets"
-            onPress={() => navigation.navigate("Cart")}
-          />
+          <Button label="Buy tickets" onPress={goToCheckout} />
         </ButtonWrapper>
       )}
       <ModalSelectSeat

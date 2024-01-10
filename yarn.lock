@@ -1965,6 +1965,11 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
+"@stripe/stripe-react-native@^0.35.0":
+  version "0.35.0"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-react-native/-/stripe-react-native-0.35.0.tgz#4cd159297d22ef5a18cfe7dcb75b36eb205d4681"
+  integrity sha512-bD36NIQVnkUSkjwE7mJoqkb5E4gMBSxnZegkO0gGbgekFqdyZSHghSL6qnRVXPBTr2tRthoNL+FtmVeeYPxVLQ==
+
 "@supabase/functions-js@^2.1.0":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@supabase/functions-js/-/functions-js-2.1.2.tgz#340a8d3845ef2014338b13a6d33cfa90eb745b14"

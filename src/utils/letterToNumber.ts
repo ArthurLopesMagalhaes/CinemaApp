@@ -1,4 +1,6 @@
-const letterToNumber = {
+export const letterToNumber: {
+  [key: string]: number;
+} = {
   A: 0,
   B: 1,
   C: 2,

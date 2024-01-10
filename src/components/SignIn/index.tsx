@@ -1,4 +1,4 @@
-import { forwardRef, useMemo, useState } from "react";
+import { forwardRef, useMemo, useRef, useState } from "react";
 import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetScrollView,
@@ -24,11 +24,15 @@ export const SignIn = () => {
   const [loading, setLoading] = useState(false);
 
   const signInUser = async () => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: "example@email.com",
-      password: "example-password",
-    });
-    setUser({ email: data.user?.email, role: data.user?.role });
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+      setUser({ email: data.user?.email, role: data.user?.role });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const navigateToSignUp = () => {

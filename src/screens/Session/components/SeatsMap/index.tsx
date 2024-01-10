@@ -13,7 +13,7 @@ import { Json } from "../../../../lib/database.types";
 import { useTicketStore } from "../../../../stores/tickets";
 import { useCartStore } from "../../../../stores/cart";
 
-type Seat = {
+export type Seat = {
   id: string;
   name: string;
   status: "available" | "occupied" | "chosen" | "";

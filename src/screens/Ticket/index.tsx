@@ -13,7 +13,7 @@ import {
 
 import { Button } from "../../components/Button";
 import { Divider } from "../../components/Divider";
-import { TearLine } from "./components/TearLine";
+import { TearLine } from "../../components/TearLine";
 import { Text } from "../../components/Text";
 
 import CloseSvg from "../../assets/close.svg";

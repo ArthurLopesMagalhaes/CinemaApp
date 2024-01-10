@@ -7,17 +7,21 @@ import { theme } from "./src/global/theme";
 
 import { StatusBar } from "react-native";
 import { AppRoutes } from "./src/routes";
+import { StripeProvider } from "@stripe/stripe-react-native";
+import Config from "react-native-config";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar
-        barStyle="light-content"
-        translucent
-        backgroundColor="transparent"
-      />
+      <StripeProvider publishableKey={Config.STRIPE_PUBLISHABLE_KEY as string}>
+        <StatusBar
+          barStyle="light-content"
+          translucent
+          backgroundColor="transparent"
+        />
 
-      <AppRoutes />
+        <AppRoutes />
+      </StripeProvider>
     </ThemeProvider>
   );
 }

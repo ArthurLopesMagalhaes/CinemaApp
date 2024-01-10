@@ -14,6 +14,7 @@ type State = {
   cart: CartType;
   addTicket: (sessionId: string, ticket: TicketType) => void;
   removeTicket: (ticketId: string) => void;
+  clearCart: () => void;
 };
 
 export const useCartStore = create<State>((set) => ({
@@ -40,6 +41,11 @@ export const useCartStore = create<State>((set) => ({
         sessionId: state.cart.sessionId,
         tickets: state.cart.tickets.filter((item) => item.id !== ticketId),
       },
+    }));
+  },
+  clearCart: () => {
+    set((state) => ({
+      cart: { sessionId: "", tickets: [] },
     }));
   },
 }));
