@@ -38,4 +38,27 @@ export const cineAPI = {
       .select();
     return { data, error };
   },
+  createOrder: async (userId: string) => {
+    const { data, error } = await supabase
+      .from("orders")
+      .insert([{ user_id: userId }])
+      .select();
+    return { data, error };
+  },
+  createTicket: async (
+    ticketData: {
+      movie_id: string;
+      user_id: string;
+      seat_position: string;
+      ticket_type: string;
+      order_id: string;
+    }[]
+  ) => {
+    const { data, error } = await supabase
+      .from("tickets")
+      .insert(ticketData)
+      .select();
+
+    return { data, error };
+  },
 };

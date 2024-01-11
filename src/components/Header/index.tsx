@@ -1,10 +1,10 @@
-import { Image } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import { useTheme } from "styled-components";
 
 import { Button } from "../Button";
 import { Text } from "../Text";
 
-import { ButtonBox, Container, ImageBox, LocationBox } from "./styles";
+import { Avatar, ButtonBox, Container, ImageBox, LocationBox } from "./styles";
 
 import LocationSvg from "../../assets/location.svg";
 import Logo from "../../assets/logo.png";
@@ -28,10 +28,15 @@ export const Header = ({ onButtonPress, userLogged }: HeaderProps) => {
       </LocationBox>
       <ButtonBox>
         {/* Use a userPhoto here instead of a button */}
-        <Button
-          label={userLogged ? "Profile" : "Log In"}
-          onPress={onButtonPress}
-        />
+        {userLogged ? (
+          <TouchableOpacity onPress={onButtonPress}>
+            <Avatar
+              source={{ uri: "https://github.com/ArthurLopesMagalhaes.png" }}
+            />
+          </TouchableOpacity>
+        ) : (
+          <Button label={"Log In"} onPress={onButtonPress} />
+        )}
       </ButtonBox>
     </Container>
   );

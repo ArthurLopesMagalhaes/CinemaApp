@@ -36,7 +36,7 @@ export const Home = () => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    setUser({ email: user?.email, role: user?.role } as User);
+    setUser({ email: user?.email, role: user?.role, id: user?.id } as User);
   };
 
   const getMovies = async () => {

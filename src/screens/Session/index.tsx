@@ -34,6 +34,7 @@ import { useCartStore } from "../../stores/cart";
 import { Button } from "../../components/Button";
 import { getUpdatedSeats } from "../../utils/getUpdatedSeats";
 import { getTicketsIdFromCart } from "../../utils/getTicketsIdFromCart";
+import { useMovieStore } from "../../stores/movie";
 
 export type SessionsData = Database["public"]["Tables"]["sessions"]["Row"];
 
@@ -46,9 +47,11 @@ export const Session = () => {
   const navigation = useNavigation();
   const ModalSelectSeatRef = useRef<BottomSheet>(null);
   const ModalSelectDateAndTimeRef = useRef<BottomSheet>(null);
-  const tickets = useTicketStore((state) => state.tickets);
+
   const cart = useCartStore((state) => state.cart);
   const clearCart = useCartStore((state) => state.clearCart);
+
+  const movie = useMovieStore((state) => state.movie);
 
   const [loading, setLoading] = useState(true);
   const [currentSeat, setCurrentSeat] = useState("");
@@ -99,7 +102,7 @@ export const Session = () => {
   };
 
   const goToCheckout = () => {
-    navigation.navigate("Cart");
+    navigation.navigate("Cart", { sessionDate: selectedSession.date_and_time });
   };
 
   useEffect(() => {
@@ -111,7 +114,7 @@ export const Session = () => {
   ) : (
     <Container>
       <TopFixed>
-        <TopBar title="Cinema" subtitle="The Batman" leftIcon={BackSvg} />
+        <TopBar title="Cinema" subtitle={movie.title} leftIcon={BackSvg} />
 
         <DateAndTimeBox>
           <DateAndTimeButton

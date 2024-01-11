@@ -17,6 +17,7 @@ export const ImageBox = styled.View`
 export const ButtonBox = styled.View`
   flex: 1;
   height: 56px;
+  justify-content: center;
 `;
 
 export const LocationBox = styled.View`
@@ -25,4 +26,11 @@ export const LocationBox = styled.View`
   gap: 10px;
   justify-content: center;
   flex: 2;
+`;
+
+export const Avatar = styled.Image`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  align-self: flex-end;
 `;

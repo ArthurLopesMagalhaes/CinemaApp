@@ -20,6 +20,7 @@ import {
   LabelsRow,
 } from "./styles";
 import { Database } from "../../lib/database.types";
+import { useMovieStore } from "../../stores/movie";
 
 type RouteParams = {
   movieId: string;
@@ -34,12 +35,14 @@ export const AboutMovie = () => {
 
   const [loading, setLoading] = useState(true);
   const [movieData, setMovieData] = useState<MovieData>();
+  const setMovie = useMovieStore((state) => state.setMovie);
 
   const { movieId } = route.params as RouteParams;
   const getMovieDetails = async () => {
     const response = await cineAPI.getMovieDetails(movieId);
     if (response.movies) {
       setMovieData(response.movies);
+      setMovie(response.movies);
     }
     setLoading(false);
   };
