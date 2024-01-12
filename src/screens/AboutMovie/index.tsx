@@ -38,6 +38,11 @@ export const AboutMovie = () => {
   const setMovie = useMovieStore((state) => state.setMovie);
 
   const { movieId } = route.params as RouteParams;
+
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   const getMovieDetails = async () => {
     const response = await cineAPI.getMovieDetails(movieId);
     if (response.movies) {
@@ -55,7 +60,11 @@ export const AboutMovie = () => {
     <Loading />
   ) : (
     <Container>
-      <TopBar title={movieData.title} leftIcon={BackSvg} />
+      <TopBar
+        title={movieData.title}
+        leftIcon={BackSvg}
+        onLeftIconPress={goBack}
+      />
       <Content>
         <View style={{ height: 200, backgroundColor: "red" }} />
         <AboutMovieWrapper>

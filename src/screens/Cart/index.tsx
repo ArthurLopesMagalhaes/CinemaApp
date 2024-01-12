@@ -1,6 +1,6 @@
 import { Alert } from "react-native";
 import { useState, useEffect } from "react";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useStripe } from "@stripe/stripe-react-native";
 import { useTheme } from "styled-components";
 
@@ -16,26 +16,42 @@ import { useCartStore } from "../../stores/cart";
 import { useUserStore } from "../../stores/user";
 import { cineAPI } from "../../services/api";
 import { StripeAPI } from "../../services/stripeAPI";
+import { getUpdatedSeats } from "../../utils/getUpdatedSeats";
+import { getTicketsIdFromCart } from "../../utils/getTicketsIdFromCart";
+import { SessionsData } from "../Session";
 
 type RouteParams = {
-  sessionDate: string;
+  sessionData: SessionsData;
 };
 
 export const Cart = () => {
   const route = useRoute();
+  const navigation = useNavigation();
   const theme = useTheme();
   const cart = useCartStore((state) => state.cart);
   const movie = useMovieStore((state) => state.movie);
   const user = useUserStore((state) => state.user);
+  const clearCart = useCartStore((state) => state.clearCart);
 
-  const { sessionDate } = route.params as RouteParams;
+  const { sessionData } = route.params as RouteParams;
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
   const [loading, setLoading] = useState(false);
 
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   const updateSession = async () => {
-    const response = await cineAPI.updateSession(cart.sessionId, [
-      [{ id: "A1", status: "occupied", name: "A1" }],
-    ]);
+    const newSeatsArrangement = getUpdatedSeats(
+      [...sessionData.seats_arrangement],
+      getTicketsIdFromCart(cart.tickets)
+    );
+    const response = await cineAPI.updateSession(
+      sessionData.id,
+      newSeatsArrangement
+    );
+    console.log(response);
+    clearCart();
   };
 
   const initializePaymentSheet = async () => {
@@ -75,6 +91,7 @@ export const Cart = () => {
           order_id: responseOrder.data![0].id,
         }))
       );
+      updateSession();
       console.log(responseTicket);
       Alert.alert("Success", "Your order is confirmed!");
     }
@@ -86,7 +103,7 @@ export const Cart = () => {
 
   return (
     <Container>
-      <TopBar title="Cart" leftIcon={BackSvg} />
+      <TopBar title="Cart" leftIcon={BackSvg} onLeftIconPress={goBack} />
       <TopInfo>
         <Text weight="Bold" size={18}>
           {movie.title}
@@ -95,13 +112,13 @@ export const Cart = () => {
           <Text color={theme.colors.text.muted} style={{ width: 90 }}>
             Cinema
           </Text>
-          <Text weight="Medium">Eurasia Cinema</Text>
+          <Text weight="Medium">Cinema APP</Text>
         </Row>
         <Row>
           <Text color={theme.colors.text.muted} style={{ width: 90 }}>
             Date
           </Text>
-          <Text weight="Medium">{sessionDate}</Text>
+          <Text weight="Medium">{sessionData.date_and_time}</Text>
         </Row>
         <Row>
           <Text color={theme.colors.text.muted} style={{ width: 90 }}>

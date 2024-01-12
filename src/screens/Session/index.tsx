@@ -80,6 +80,10 @@ export const Session = () => {
 
   const { movieId } = route.params as RouteParams;
 
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   const getSession = async () => {
     const response = await cineAPI.getSession(movieId);
     if (response.sessions) {
@@ -88,21 +92,8 @@ export const Session = () => {
     setLoading(false);
   };
 
-  const updateSession = async () => {
-    const newSeatsArrangement = getUpdatedSeats(
-      [...selectedSession.seats_arrangement],
-      getTicketsIdFromCart(cart.tickets)
-    );
-    const response = await cineAPI.updateSession(
-      selectedSession.id,
-      newSeatsArrangement
-    );
-    console.log(response);
-    clearCart();
-  };
-
   const goToCheckout = () => {
-    navigation.navigate("Cart", { sessionDate: selectedSession.date_and_time });
+    navigation.navigate("Cart", { sessionData: selectedSession });
   };
 
   useEffect(() => {
@@ -114,7 +105,12 @@ export const Session = () => {
   ) : (
     <Container>
       <TopFixed>
-        <TopBar title="Cinema" subtitle={movie.title} leftIcon={BackSvg} />
+        <TopBar
+          title="Cinema"
+          subtitle={movie.title}
+          leftIcon={BackSvg}
+          onLeftIconPress={goBack}
+        />
 
         <DateAndTimeBox>
           <DateAndTimeButton
@@ -151,6 +147,7 @@ export const Session = () => {
         ref={ModalSelectSeatRef}
         seat={currentSeat}
         sessionId={selectedSession.id}
+        afterSelection={() => closeModal(ModalSelectSeatRef)}
       />
       <SelectDateAndTimeModal
         ref={ModalSelectDateAndTimeRef}

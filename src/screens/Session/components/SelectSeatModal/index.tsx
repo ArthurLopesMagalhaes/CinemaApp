@@ -13,6 +13,7 @@ import { useCartStore } from "../../../../stores/cart";
 type ModalSelectSeatProps = {
   seat: string;
   sessionId: string;
+  afterSelection: () => void;
 };
 
 export const ModalSelectSeat = forwardRef(
@@ -22,6 +23,18 @@ export const ModalSelectSeat = forwardRef(
 
     // const addTicket = useTicketStore((state) => state.addTicket);
     const addTicket = useCartStore((state) => state.addTicket);
+
+    const handleSelection = (
+      sessionId: string,
+      seat: string,
+      ticketType: "Adult" | "Student"
+    ) => {
+      addTicket(sessionId, {
+        id: seat,
+        type: ticketType,
+      });
+      props.afterSelection();
+    };
 
     return (
       <BottomSheet
@@ -53,20 +66,14 @@ export const ModalSelectSeat = forwardRef(
             type="Adult"
             price={80}
             onPress={() =>
-              addTicket(props.sessionId, {
-                id: props.seat,
-                type: "Adult",
-              })
+              handleSelection(props.sessionId, props.seat, "Adult")
             }
           />
           <TicketTypeButton
             type="Student"
             price={50}
             onPress={() =>
-              addTicket(props.sessionId, {
-                id: props.seat,
-                type: "Student",
-              })
+              handleSelection(props.sessionId, props.seat, "Student")
             }
           />
         </Content>

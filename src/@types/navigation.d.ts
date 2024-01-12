@@ -1,3 +1,5 @@
+import { SessionsData } from "../screens/Session";
+
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
@@ -8,7 +10,7 @@ export declare global {
       SignIn: undefined;
       SignUp: undefined;
       Profile: undefined;
-      Cart: { sessionDate: string };
+      Cart: { sessionData: SessionsData };
     }
   }
 }

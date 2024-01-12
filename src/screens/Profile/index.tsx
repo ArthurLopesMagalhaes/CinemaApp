@@ -5,9 +5,17 @@ import { Text } from "../../components/Text";
 
 import { supabase } from "../../services/supabase";
 import { useNavigation } from "@react-navigation/native";
+import { TopBar } from "../../components/TopBar";
+
+import BackSvg from "../../assets/back.svg";
+import LogoutSvg from "../../assets/logout.svg";
 
 export const Profile = () => {
   const navigation = useNavigation();
+
+  const goBack = () => {
+    navigation.goBack();
+  };
 
   const signOutUser = async () => {
     const { error } = await supabase.auth.signOut();
@@ -19,7 +27,14 @@ export const Profile = () => {
 
   return (
     <Container>
-      <Text>Profile</Text>
+      <TopBar
+        title="Profile"
+        leftIcon={BackSvg}
+        rightIcon={LogoutSvg}
+        onLeftIconPress={goBack}
+        onRightIconPress={signOutUser}
+      />
+
       <Button title="Sign Out" onPress={signOutUser} />
     </Container>
   );
