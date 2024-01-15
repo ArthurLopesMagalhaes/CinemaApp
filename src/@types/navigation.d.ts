@@ -6,7 +6,7 @@ export declare global {
       Home: undefined;
       AboutMovie: { movieId: string };
       Session: { movieId: string };
-      Ticket: undefined;
+      Ticket: { ticketInfo: TicketInfo };
       SignIn: undefined;
       SignUp: undefined;
       Profile: undefined;

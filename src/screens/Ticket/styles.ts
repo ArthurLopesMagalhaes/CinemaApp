@@ -1,7 +1,6 @@
 import { styled } from "styled-components/native";
 
 export const Container = styled.ScrollView`
-  flex: 1;
   background-color: ${(props) => props.theme.colors.surface.main};
 `;
 
@@ -19,9 +18,12 @@ export const QrCodeContainer = styled.View`
 `;
 
 export const QrCodeImage = styled.Image``;
-export const TicketInfos = styled.View`
+export const BottomView = styled.View`
   padding: 16px;
+  flex: 1;
+  justify-content: space-between;
 `;
+export const TicketInfos = styled.View``;
 
 export const LabelsRow = styled.View`
   flex-direction: row;

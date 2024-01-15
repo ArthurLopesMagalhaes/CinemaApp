@@ -50,7 +50,6 @@ export const Cart = () => {
       sessionData.id,
       newSeatsArrangement
     );
-    console.log(response);
     clearCart();
   };
 
@@ -92,7 +91,6 @@ export const Cart = () => {
         }))
       );
       updateSession();
-      console.log(responseTicket);
       Alert.alert("Success", "Your order is confirmed!");
     }
   };

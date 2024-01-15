@@ -15,8 +15,6 @@ type TicketListItemType = {
 };
 
 export const TicketListItem = ({ data, onPress }: TicketListItemType) => {
-  console.log(data.sessions);
-
   return (
     <Container onPress={onPress}>
       <MovieImg

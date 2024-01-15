@@ -39,8 +39,20 @@ export const Profile = () => {
     navigation.goBack();
   };
 
-  const goToTicketScreen = () => {
-    navigation.navigate("Ticket");
+  const goToTicketScreen = (
+    id: string,
+    date: string,
+    seat: string,
+    type: string
+  ) => {
+    navigation.navigate("Ticket", {
+      ticketInfo: {
+        id,
+        date,
+        seat,
+        type,
+      },
+    });
   };
 
   const signOutUser = async () => {
@@ -57,7 +69,6 @@ export const Profile = () => {
   const getUserTickets = async () => {
     const response = await cineAPI.getTickets(user.id);
     setTickets(response.data);
-    console.log(response.data);
   };
 
   useEffect(() => {
@@ -82,7 +93,17 @@ export const Profile = () => {
           data={tickets}
           keyExtractor={(item) => item.id}
           renderItem={({ item, index }) => (
-            <TicketListItem data={item} onPress={goToTicketScreen} />
+            <TicketListItem
+              data={item}
+              onPress={() =>
+                goToTicketScreen(
+                  item.id,
+                  item.sessions.date_and_time,
+                  item.seat_position,
+                  item.ticket_type
+                )
+              }
+            />
           )}
           ItemSeparatorComponent={() => <Divider top={12} />}
         />
