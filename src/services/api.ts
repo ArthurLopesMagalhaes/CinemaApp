@@ -1,5 +1,6 @@
 import { Database } from "../lib/database.types";
 import { Seat } from "../screens/Session/components/SeatsMap";
+import { useUserStore } from "../stores/user";
 import { supabase } from "./supabase";
 
 export type SeatsArrangementType =
@@ -59,6 +60,21 @@ export const cineAPI = {
       .insert(ticketData)
       .select();
 
+    return { data, error };
+  },
+  getTickets: async (userId: string) => {
+    const { data, error } = await supabase
+      .from("tickets")
+      .select(
+        `
+      *,
+      movies (
+        title,
+        img_url
+      )
+    `
+      )
+      .eq("user_id", userId);
     return { data, error };
   },
 };
