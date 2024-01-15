@@ -15,11 +15,16 @@ import { TicketListItem } from "./components/TicketListItem";
 import { useEffect, useState } from "react";
 import { cineAPI } from "../../services/api";
 
-type TicketType = {
+export type TicketType = {
   id: string;
   movie_id: string | null;
+  movies: {
+    image_url: string;
+    title: string;
+  } | null;
   order_id: string | null;
   seat_position: string | null;
+  sessions: { date_and_time: string };
   ticket_type: string;
   user_id: string | null;
 };
@@ -52,6 +57,7 @@ export const Profile = () => {
   const getUserTickets = async () => {
     const response = await cineAPI.getTickets(user.id);
     setTickets(response.data);
+    console.log(response.data);
   };
 
   useEffect(() => {

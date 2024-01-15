@@ -70,7 +70,10 @@ export const cineAPI = {
       *,
       movies (
         title,
-        img_url
+        image_url
+      ),
+      sessions (
+        date_and_time
       )
     `
       )

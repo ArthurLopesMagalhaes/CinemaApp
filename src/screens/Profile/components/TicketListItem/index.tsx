@@ -1,22 +1,47 @@
+import { TicketType } from "../..";
 import { Text } from "../../../../components/Text";
-import { Container } from "./styles";
+import { formatDate } from "../../../../utils/formatDate";
+import {
+  Container,
+  InfoBox,
+  InfoBoxTop,
+  InfoBoxBottom,
+  MovieImg,
+} from "./styles";
 
 type TicketListItemType = {
-  data: {
-    id: string;
-    movie_id: string | null;
-    order_id: string | null;
-    seat_position: string | null;
-    ticket_type: string;
-    user_id: string | null;
-  };
+  data: TicketType;
   onPress: () => void;
 };
 
 export const TicketListItem = ({ data, onPress }: TicketListItemType) => {
+  console.log(data.sessions);
+
   return (
     <Container onPress={onPress}>
-      <Text>Hi</Text>
+      <MovieImg
+        source={{
+          uri: data.movies?.image_url,
+        }}
+      />
+      <InfoBox>
+        <InfoBoxTop>
+          <Text
+            size={18}
+            weight="Medium"
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {data.movies?.title}
+          </Text>
+        </InfoBoxTop>
+        <InfoBoxBottom>
+          <Text>{formatDate(data.sessions.date_and_time)}</Text>
+          <Text>
+            {data.seat_position} - {data.ticket_type}
+          </Text>
+        </InfoBoxBottom>
+      </InfoBox>
     </Container>
   );
 };
