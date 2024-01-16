@@ -64,7 +64,7 @@ export const SeatsMap = ({
           }}
         >
           <ScrollView contentContainerStyle={{ gap: 8 }} horizontal>
-            {seatsArrangement.map((row, i) => (
+            {seatsArrangement.map((column, i) => (
               <Column key={i}>
                 {seatsArrangement[i].map((seat, i) => (
                   <Seat

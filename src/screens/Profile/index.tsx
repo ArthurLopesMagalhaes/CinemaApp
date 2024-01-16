@@ -17,16 +17,16 @@ import { cineAPI } from "../../services/api";
 
 export type TicketType = {
   id: string;
-  movie_id: string | null;
+  movie_id: string;
   movies: {
     image_url: string;
     title: string;
   } | null;
-  order_id: string | null;
-  seat_position: string | null;
-  sessions: { date_and_time: string };
+  order_id: string;
+  seat_position: string;
+  sessions: { date_and_time: string } | null;
   ticket_type: string;
-  user_id: string | null;
+  user_id: string;
 };
 
 export const Profile = () => {
@@ -45,6 +45,7 @@ export const Profile = () => {
     seat: string,
     type: string
   ) => {
+    console.log(date);
     navigation.navigate("Ticket", {
       ticketInfo: {
         id,
@@ -98,7 +99,7 @@ export const Profile = () => {
               onPress={() =>
                 goToTicketScreen(
                   item.id,
-                  item.sessions.date_and_time,
+                  item.sessions!.date_and_time,
                   item.seat_position,
                   item.ticket_type
                 )

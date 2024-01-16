@@ -1,4 +1,4 @@
-import { forwardRef, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import BottomSheet, {
   BottomSheetBackdrop,
   BottomSheetScrollView,
@@ -29,7 +29,13 @@ export const SignIn = () => {
         email: email,
         password: password,
       });
-      setUser({ email: data.user?.email, role: data.user?.role });
+      if (data.user) {
+        setUser({
+          email: data.user.email,
+          role: data.user.role,
+          id: data.user.id,
+        });
+      }
     } catch (error) {
       console.log(error);
     }

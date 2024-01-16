@@ -43,7 +43,10 @@ export const SelectDateAndTimeModal = forwardRef(
           </Text>
           <BottomSheetScrollView>
             {props.data.map((session) => (
-              <DateTimeContainer onPress={() => props.onPress(session)}>
+              <DateTimeContainer
+                onPress={() => props.onPress(session)}
+                key={session.id}
+              >
                 <Text>{formatDate(session.date_and_time)}</Text>
               </DateTimeContainer>
             ))}
