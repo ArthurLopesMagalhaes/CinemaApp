@@ -1,6 +1,7 @@
 import { Alert, Button, FlatList } from "react-native";
+import { QrCode } from "phosphor-react-native";
 
-import { Container, Content } from "./styles";
+import { Container, Content, Footer, ScanButton } from "./styles";
 import { Text } from "../../components/Text";
 
 import { supabase } from "../../services/supabase";
@@ -89,6 +90,7 @@ export const Profile = () => {
         <Text size={22} weight="Bold">
           Welcome, Arthur 👋
         </Text>
+
         <Divider top={20} />
         <FlatList
           data={tickets}
@@ -109,6 +111,11 @@ export const Profile = () => {
           ItemSeparatorComponent={() => <Divider top={12} />}
         />
       </Content>
+      <Footer>
+        <ScanButton>
+          <QrCode color="#ffff" size={40} />
+        </ScanButton>
+      </Footer>
     </Container>
   );
 };
