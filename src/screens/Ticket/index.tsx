@@ -1,5 +1,6 @@
 import { useTheme } from "styled-components";
 import { useRoute } from "@react-navigation/native";
+import QRCode from "react-native-qrcode-svg";
 import { TopBar } from "../../components/TopBar";
 import {
   BottomView,
@@ -45,7 +46,8 @@ export const Ticket = () => {
 
       <QrCodeContent>
         <QrCodeContainer>
-          <QrCodeImage source={QrCodePng} />
+          {/* <QrCodeImage source={QrCodePng} /> */}
+          <QRCode value={ticketInfo.id} size={200} />
         </QrCodeContainer>
         <Divider top={16} />
         <Text color={theme.colors.text.muted}>
