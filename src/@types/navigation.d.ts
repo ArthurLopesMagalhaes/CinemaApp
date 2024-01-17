@@ -10,6 +10,7 @@ export declare global {
       SignIn: undefined;
       SignUp: undefined;
       Profile: undefined;
+      CameraScan: undefined;
       Cart: { sessionData: SessionsData };
     }
   }

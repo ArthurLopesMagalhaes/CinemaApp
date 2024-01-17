@@ -7,6 +7,7 @@ import { Splash } from "../screens/Splash";
 import { Ticket } from "../screens/Ticket";
 import { Profile } from "../screens/Profile";
 import { Cart } from "../screens/Cart";
+import { CameraScan } from "../screens/CameraScan";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ export const StackRoutes = () => {
       <Stack.Screen name="Ticket" component={Ticket} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen name="CameraScan" component={CameraScan} />
     </Stack.Navigator>
   );
 };

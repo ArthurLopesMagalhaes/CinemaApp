@@ -1,5 +1,6 @@
 import { Alert, Button, FlatList } from "react-native";
-import { QrCode } from "phosphor-react-native";
+// import { QrCode } from "phosphor-react-native";
+import { useCameraPermission } from "react-native-vision-camera";
 
 import { Container, Content, Footer, ScanButton } from "./styles";
 import { Text } from "../../components/Text";
@@ -31,6 +32,9 @@ export type TicketType = {
 };
 
 export const Profile = () => {
+  const { hasPermission, requestPermission } = useCameraPermission();
+  console.log(hasPermission);
+
   const navigation = useNavigation();
   const user = useUserStore((state) => state.user);
 
@@ -73,6 +77,13 @@ export const Profile = () => {
     setTickets(response.data);
   };
 
+  const handleQrCodeScanPress = () => {
+    if (!hasPermission) {
+      return requestPermission();
+    }
+    navigation.navigate("CameraScan");
+  };
+
   useEffect(() => {
     getUserTickets();
   }, []);
@@ -112,8 +123,8 @@ export const Profile = () => {
         />
       </Content>
       <Footer>
-        <ScanButton>
-          <QrCode color="#ffff" size={40} />
+        <ScanButton onPress={handleQrCodeScanPress}>
+          {/* <QrCode color="#ffff" size={40} /> */}
         </ScanButton>
       </Footer>
     </Container>
