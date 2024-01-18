@@ -7,6 +7,15 @@ export type SeatsArrangementType =
   Database["public"]["Tables"]["sessions"]["Row"]["seats_arrangement"];
 
 export const cineAPI = {
+  getUser: async (userId: string) => {
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("user_id", userId)
+      .limit(1)
+      .single();
+    return { data, error };
+  },
   getMovies: async () => {
     const { data: movies, error } = await supabase.from("movies").select("*");
     return { movies, error };
@@ -78,6 +87,7 @@ export const cineAPI = {
       )
     `
       )
+      .order("status", { ascending: true })
       .eq("user_id", userId);
     return { data, error };
   },

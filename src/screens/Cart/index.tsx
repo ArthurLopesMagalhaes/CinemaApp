@@ -1,4 +1,4 @@
-import { Alert } from "react-native";
+import { Alert, View } from "react-native";
 import { useState, useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useStripe } from "@stripe/stripe-react-native";
@@ -20,6 +20,7 @@ import { getUpdatedSeats } from "../../utils/getUpdatedSeats";
 import { getTicketsIdFromCart } from "../../utils/getTicketsIdFromCart";
 import { SessionsData } from "../Session";
 import { formatDate } from "../../utils/formatDate";
+import { calculateCartAmountPrice } from "../../utils/calculateCartAmountPrice";
 
 type RouteParams = {
   sessionData: SessionsData;
@@ -56,7 +57,10 @@ export const Cart = () => {
 
   const initializePaymentSheet = async () => {
     const { paymentIntent, ephemeralKey, customer, publishableKey } =
-      await StripeAPI.fetchPaymentSheetParams(1000, "eren@gmai.com");
+      await StripeAPI.fetchPaymentSheetParams(
+        calculateCartAmountPrice(cart.tickets) * 100, // Stripe method (has to be in cents)
+        "eren@gmai.com"
+      );
 
     const { error } = await initPaymentSheet({
       merchantDisplayName: "CINE APP",
@@ -124,9 +128,13 @@ export const Cart = () => {
           <Text color={theme.colors.text.muted} style={{ width: 90 }}>
             Seats
           </Text>
-          <Text weight="Medium">
-            {cart.tickets.map((item) => item.id).join(", ")}
-          </Text>
+          <View>
+            {cart.tickets.map((item) => (
+              <Text weight="Medium" key={item.id}>
+                {item.id} - {item.type}
+              </Text>
+            ))}
+          </View>
         </Row>
       </TopInfo>
       <BottomInfo>
@@ -140,7 +148,7 @@ export const Cart = () => {
             1x Adult
           </Text>
           <Text weight="Medium" size={16}>
-            R$ 80
+            R$ {calculateCartAmountPrice(cart.tickets)}
           </Text>
         </Row>
       </BottomInfo>

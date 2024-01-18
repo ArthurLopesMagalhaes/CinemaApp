@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { TicketType } from "../..";
 import { Text } from "../../../../components/Text";
 import { formatDate } from "../../../../utils/formatDate";
@@ -7,6 +8,7 @@ import {
   InfoBoxTop,
   InfoBoxBottom,
   MovieImg,
+  Overlay,
 } from "./styles";
 
 type TicketListItemType = {
@@ -17,6 +19,7 @@ type TicketListItemType = {
 export const TicketListItem = ({ data, onPress }: TicketListItemType) => {
   return (
     <Container onPress={onPress}>
+      <Overlay overlay={data.status === "closed"} />
       <MovieImg
         source={{
           uri: data.movies?.image_url,

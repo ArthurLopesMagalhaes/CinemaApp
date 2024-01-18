@@ -1,11 +1,16 @@
 export type TicketType = "Adult" | "Student";
 
-type TicketTypeProps = {
+export type TicketTypeProps = {
   type: TicketType;
   price: number;
 };
 
 export const ticketType: TicketTypeProps[] = [
-  { type: "Adult", price: 80 },
-  { type: "Student", price: 40 },
+  { type: "Adult", price: 18 },
+  { type: "Student", price: 9 },
 ];
+
+export const ticketPrice = {
+  Adult: 18,
+  Student: 9,
+};

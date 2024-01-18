@@ -13,6 +13,7 @@ import { ButtonBox, Content, Input } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { supabase } from "../../services/supabase";
 import { useUserStore } from "../../stores/user";
+import { cineAPI } from "../../services/api";
 
 export const SignIn = () => {
   const navigate = useNavigation();
@@ -32,8 +33,8 @@ export const SignIn = () => {
       if (data.user) {
         setUser({
           email: data.user.email,
-          role: data.user.role,
           id: data.user.id,
+          role: "aaaa",
         });
       }
     } catch (error) {

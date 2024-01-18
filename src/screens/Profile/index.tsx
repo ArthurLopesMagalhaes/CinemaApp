@@ -29,6 +29,7 @@ export type TicketType = {
   sessions: { date_and_time: string } | null;
   ticket_type: string;
   user_id: string;
+  status: string;
 };
 
 export const Profile = () => {
@@ -37,6 +38,7 @@ export const Profile = () => {
 
   const navigation = useNavigation();
   const user = useUserStore((state) => state.user);
+  const clearUser = useUserStore((state) => state.clearUser);
 
   const [tickets, setTickets] = useState<TicketType[] | null>(null);
 
@@ -70,6 +72,7 @@ export const Profile = () => {
       index: 0,
       routes: [{ name: "Home" }],
     });
+    clearUser();
   };
 
   const getUserTickets = async () => {
@@ -87,6 +90,8 @@ export const Profile = () => {
   useEffect(() => {
     getUserTickets();
   }, []);
+
+  console.log(user);
 
   return (
     <Container>
@@ -122,11 +127,13 @@ export const Profile = () => {
           ItemSeparatorComponent={() => <Divider top={12} />}
         />
       </Content>
-      <Footer>
-        <ScanButton onPress={handleQrCodeScanPress}>
-          {/* <QrCode color="#ffff" size={40} /> */}
-        </ScanButton>
-      </Footer>
+      {user.role === "admin" && (
+        <Footer>
+          <ScanButton onPress={handleQrCodeScanPress}>
+            {/* <QrCode color="#ffff" size={40} /> */}
+          </ScanButton>
+        </Footer>
+      )}
     </Container>
   );
 };
