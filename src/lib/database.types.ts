@@ -122,6 +122,7 @@ export interface Database {
           order_id: string;
           seat_position: string;
           session_id: string;
+          status: string;
           ticket_type: string;
           user_id: string;
         };
@@ -131,6 +132,7 @@ export interface Database {
           order_id: string;
           seat_position: string;
           session_id: string;
+          status?: string;
           ticket_type?: string;
           user_id: string;
         };
@@ -140,6 +142,7 @@ export interface Database {
           order_id?: string;
           seat_position?: string;
           session_id?: string;
+          status?: string;
           ticket_type?: string;
           user_id?: string;
         };

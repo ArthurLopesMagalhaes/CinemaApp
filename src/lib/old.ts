@@ -11,10 +11,10 @@ export interface Database {
     Tables: {
       movies: {
         Row: {
-          cast: string[] | null;
+          cast: string[];
           certificate: string;
-          description: string | null;
-          director: string | null;
+          description: string;
+          director: string;
           genres: string[];
           id: string;
           image_url: string;
@@ -22,10 +22,10 @@ export interface Database {
           title: string;
         };
         Insert: {
-          cast?: string[] | null;
+          cast: string[];
           certificate?: string;
-          description?: string | null;
-          director?: string | null;
+          description?: string;
+          director: string;
           genres: string[];
           id?: string;
           image_url: string;
@@ -33,10 +33,10 @@ export interface Database {
           title: string;
         };
         Update: {
-          cast?: string[] | null;
+          cast?: string[];
           certificate?: string;
-          description?: string | null;
-          director?: string | null;
+          description?: string;
+          director?: string;
           genres?: string[];
           id?: string;
           image_url?: string;
@@ -49,17 +49,17 @@ export interface Database {
         Row: {
           created_at: string;
           id: string;
-          user_id: string | null;
+          user_id: string;
         };
         Insert: {
           created_at?: string;
           id?: string;
-          user_id?: string | null;
+          user_id: string;
         };
         Update: {
           created_at?: string;
           id?: string;
-          user_id?: string | null;
+          user_id?: string;
         };
         Relationships: [
           {
@@ -118,27 +118,30 @@ export interface Database {
       tickets: {
         Row: {
           id: string;
-          movie_id: string | null;
-          order_id: string | null;
-          seat_position: string | null;
+          movie_id: string;
+          order_id: string;
+          seat_position: string;
+          session_id: string;
           ticket_type: string;
-          user_id: string | null;
+          user_id: string;
         };
         Insert: {
           id?: string;
-          movie_id?: string | null;
-          order_id?: string | null;
-          seat_position?: string | null;
+          movie_id: string;
+          order_id: string;
+          seat_position: string;
+          session_id: string;
           ticket_type?: string;
-          user_id?: string | null;
+          user_id: string;
         };
         Update: {
           id?: string;
-          movie_id?: string | null;
-          order_id?: string | null;
-          seat_position?: string | null;
+          movie_id?: string;
+          order_id?: string;
+          seat_position?: string;
+          session_id?: string;
           ticket_type?: string;
-          user_id?: string | null;
+          user_id?: string;
         };
         Relationships: [
           {
@@ -156,6 +159,13 @@ export interface Database {
             referencedColumns: ["id"];
           },
           {
+            foreignKeyName: "tickets_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "sessions";
+            referencedColumns: ["id"];
+          },
+          {
             foreignKeyName: "tickets_user_id_fkey";
             columns: ["user_id"];
             isOneToOne: false;
@@ -166,19 +176,22 @@ export interface Database {
       };
       users: {
         Row: {
-          email: string | null;
+          email: string;
           id: string;
-          name: string | null;
+          name: string;
+          role: string;
         };
         Insert: {
-          email?: string | null;
+          email: string;
           id: string;
-          name?: string | null;
+          name: string;
+          role?: string;
         };
         Update: {
-          email?: string | null;
+          email?: string;
           id?: string;
-          name?: string | null;
+          name?: string;
+          role?: string;
         };
         Relationships: [
           {
