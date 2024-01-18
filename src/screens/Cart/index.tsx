@@ -19,6 +19,7 @@ import { StripeAPI } from "../../services/stripeAPI";
 import { getUpdatedSeats } from "../../utils/getUpdatedSeats";
 import { getTicketsIdFromCart } from "../../utils/getTicketsIdFromCart";
 import { SessionsData } from "../Session";
+import { formatDate } from "../../utils/formatDate";
 
 type RouteParams = {
   sessionData: SessionsData;
@@ -88,6 +89,7 @@ export const Cart = () => {
           seat_position: ticket.id,
           ticket_type: ticket.type,
           order_id: responseOrder.data![0].id,
+          session_id: sessionData.id,
         }))
       );
       updateSession();
@@ -116,7 +118,7 @@ export const Cart = () => {
           <Text color={theme.colors.text.muted} style={{ width: 90 }}>
             Date
           </Text>
-          <Text weight="Medium">{sessionData.date_and_time}</Text>
+          <Text weight="Medium">{formatDate(sessionData.date_and_time)}</Text>
         </Row>
         <Row>
           <Text color={theme.colors.text.muted} style={{ width: 90 }}>

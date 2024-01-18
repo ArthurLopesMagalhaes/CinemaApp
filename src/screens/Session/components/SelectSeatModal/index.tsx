@@ -64,14 +64,14 @@ export const ModalSelectSeat = forwardRef(
           </TextsBox>
           <TicketTypeButton
             type="Adult"
-            price={80}
+            price={18}
             onPress={() =>
               handleSelection(props.sessionId, props.seat, "Adult")
             }
           />
           <TicketTypeButton
             type="Student"
-            price={50}
+            price={9}
             onPress={() =>
               handleSelection(props.sessionId, props.seat, "Student")
             }

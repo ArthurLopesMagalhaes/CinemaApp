@@ -53,6 +53,7 @@ export const cineAPI = {
       seat_position: string;
       ticket_type: string;
       order_id: string;
+      session_id: string;
     }[]
   ) => {
     const { data, error } = await supabase
@@ -79,5 +80,12 @@ export const cineAPI = {
       )
       .eq("user_id", userId);
     return { data, error };
+  },
+  updateTicketStatus: async (ticketId: string) => {
+    const { data, error } = await supabase
+      .from("tickets")
+      .update({ status: "closed" })
+      .eq("id", ticketId)
+      .select();
   },
 };

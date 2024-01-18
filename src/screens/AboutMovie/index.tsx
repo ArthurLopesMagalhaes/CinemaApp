@@ -18,6 +18,7 @@ import {
   Content,
   Footer,
   LabelsRow,
+  MovieImg,
 } from "./styles";
 import { Database } from "../../lib/database.types";
 import { useMovieStore } from "../../stores/movie";
@@ -66,7 +67,7 @@ export const AboutMovie = () => {
         onLeftIconPress={goBack}
       />
       <Content>
-        <View style={{ height: 200, backgroundColor: "red" }} />
+        <MovieImg source={{ uri: movieData.image_url }} resizeMode="cover" />
         <AboutMovieWrapper>
           <Text>{movieData.description}</Text>
           <Divider top={16} />

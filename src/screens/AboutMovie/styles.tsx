@@ -8,6 +8,11 @@ export const Container = styled.SafeAreaView`
 export const Content = styled.View`
   flex: 1;
 `;
+
+export const MovieImg = styled.Image`
+  height: 200px;
+`;
+
 export const AboutMovieWrapper = styled.ScrollView`
   padding: 16px;
 `;
