@@ -8,6 +8,8 @@ import { Ticket } from "../screens/Ticket";
 import { Profile } from "../screens/Profile";
 import { Cart } from "../screens/Cart";
 import { CameraScan } from "../screens/CameraScan";
+import { SignIn } from "../screens/SignIn";
+import { SignUp } from "../screens/SignUp";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +17,8 @@ export const StackRoutes = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="AboutMovie" component={AboutMovie} />
       <Stack.Screen name="Session" component={Session} />
       <Stack.Screen name="Ticket" component={Ticket} />

@@ -2,7 +2,6 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
   justify-content: space-between;
-
   align-items: center;
   flex-direction: row;
   background-color: ${(props) => props.theme.colors.surface.glass};

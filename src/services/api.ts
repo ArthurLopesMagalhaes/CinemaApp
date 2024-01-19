@@ -7,6 +7,25 @@ export type SeatsArrangementType =
   Database["public"]["Tables"]["sessions"]["Row"]["seats_arrangement"];
 
 export const cineAPI = {
+  signInUser: async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    return { data, error };
+  },
+  signUpUser: async (name: string, email: string, password: string) => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          name,
+        },
+      },
+    });
+    return { data, error };
+  },
   getUser: async (userId: string) => {
     const { data, error } = await supabase
       .from("users")

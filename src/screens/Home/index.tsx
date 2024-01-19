@@ -5,13 +5,13 @@ import { Container, Content } from "./styles";
 
 import { Divider } from "../../components/Divider";
 import { Header } from "../../components/Header";
-import { ModalAuth } from "../../components/ModalAuth";
+
 import { Movie, MovieList } from "../../components/MovieList";
 import { Text } from "../../components/Text";
 import { supabase } from "../../services/supabase";
-import { User } from "@supabase/supabase-js";
+
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { useUserStore } from "../../stores/user";
+import { UserType, useUserStore } from "../../stores/user";
 import { cineAPI } from "../../services/api";
 
 export const Home = () => {
@@ -20,12 +20,6 @@ export const Home = () => {
   const setUser = useUserStore((state) => state.setUser);
 
   const [movies, setMovies] = useState<Movie[]>([]);
-
-  const ModalRef = useRef<BottomSheet>(null);
-
-  const openModal = (bottomSheet: React.RefObject<BottomSheetMethods>) => {
-    bottomSheet.current?.expand();
-  };
 
   const goToProfile = () => {
     navigation.navigate("Profile");
@@ -36,7 +30,7 @@ export const Home = () => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    setUser({ email: user?.email, role: user?.role, id: user?.id } as User);
+    setUser({ email: user?.email, role: user?.role, id: user?.id } as UserType);
   };
 
   const getMovies = async () => {
@@ -57,7 +51,7 @@ export const Home = () => {
         onButtonPress={
           user?.role === "authenticated"
             ? goToProfile
-            : () => openModal(ModalRef)
+            : () => navigation.navigate("SignIn")
         }
         userLogged={user?.role === "authenticated"}
       />
@@ -68,7 +62,6 @@ export const Home = () => {
         <Divider top={16} />
         <MovieList data={movies} />
       </Content>
-      <ModalAuth ref={ModalRef} />
     </Container>
   );
 };

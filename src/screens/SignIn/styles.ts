@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 
 import { theme } from "../../global/theme";
@@ -5,9 +6,17 @@ import { theme } from "../../global/theme";
 export const Content = styled.View`
   flex: 1;
   align-items: center;
-  padding: 0px 16px 16px;
+  padding: 16px;
   background-color: #1d283d;
 `;
+
+export const FormWrapper = styled.View`
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`;
+
 export const ButtonBox = styled.View`
   flex-direction: row;
 `;

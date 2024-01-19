@@ -1,11 +1,7 @@
 import { create } from "zustand";
 import { User } from "@supabase/supabase-js";
 
-type UserType = {
-  id: string;
-  email: string;
-  role: string;
-};
+export type UserType = Pick<User, "id" | "email" | "role">;
 
 type State = {
   user: UserType;
