@@ -1,37 +1,45 @@
-import { useMemo, useRef, useState } from "react";
-import BottomSheet, {
-  BottomSheetBackdrop,
-  BottomSheetScrollView,
-} from "@gorhom/bottom-sheet";
+import { useState } from "react";
+import { Alert } from "react-native";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { useTheme } from "styled-components";
 
 import { Button } from "../../components/Button";
 import { Divider } from "../../components/Divider";
 import { Text } from "../../components/Text";
 
-import { ButtonBox, Content, Input, FormWrapper } from "./styles";
+import { ButtonBox, Content, FormWrapper, FormHeader } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { supabase } from "../../services/supabase";
 import { useUserStore } from "../../stores/user";
 import { cineAPI } from "../../services/api";
-import { AuthError } from "@supabase/supabase-js";
+
+import { UncontrolledInput } from "../../components/Input";
+import { loginUserFormSchema } from "../../schemas/loginUserFormSchema";
+
+type FormData = z.infer<typeof loginUserFormSchema>;
 
 export const SignIn = () => {
   const navigation = useNavigation();
   const theme = useTheme();
   const setUser = useUserStore((state) => state.setUser);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<AuthError | null>(null);
 
-  const handleSignIn = async () => {
+  const { control, handleSubmit } = useForm<FormData>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    resolver: zodResolver(loginUserFormSchema),
+  });
+
+  const onSubmit = handleSubmit(async (data) => {
     setLoading(true);
     try {
-      const response = await cineAPI.signInUser(email, password);
+      const response = await cineAPI.signInUser(data.email, data.password);
       if (response.error) {
-        return setError(response.error);
+        Alert.alert("Error", response.error.message);
       }
 
       if (response.data.user) {
@@ -46,11 +54,11 @@ export const SignIn = () => {
         });
       }
     } catch (error) {
-      console.log(error);
+      Alert.alert("Error", "An error occurred, please try again.");
     } finally {
       setLoading(false);
     }
-  };
+  });
 
   const navigateToSignUp = () => {
     navigation.navigate("SignUp");
@@ -59,19 +67,31 @@ export const SignIn = () => {
   return (
     <Content>
       <FormWrapper>
-        <Text weight="Bold" size={24}>
-          Login
-        </Text>
-        <Text color={theme.colors.text.muted} size={16}>
-          Access your tickets
-        </Text>
+        <FormHeader>
+          <Text weight="Bold" size={24}>
+            Login
+          </Text>
+          <Text color={theme.colors.text.muted} size={16}>
+            Access your tickets
+          </Text>
+        </FormHeader>
         <Divider top={16} />
-        <Input placeholder="Email" onChangeText={setEmail} />
-        <Divider top={10} />
-        <Input placeholder="Password" onChangeText={setPassword} />
-        <Divider top={10} />
+        <UncontrolledInput
+          name="email"
+          control={control}
+          placeholder="E-mail"
+          autoCapitalize="none"
+        />
+        <Divider top={16} />
+        <UncontrolledInput
+          name="password"
+          control={control}
+          placeholder="Password"
+          secureTextEntry
+        />
+        <Divider top={16} />
         <ButtonBox>
-          <Button label="Continue" onPress={handleSignIn} loading={loading} />
+          <Button label="Continue" onPress={onSubmit} loading={loading} />
         </ButtonBox>
       </FormWrapper>
 

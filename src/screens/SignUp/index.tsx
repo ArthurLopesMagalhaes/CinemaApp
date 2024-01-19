@@ -1,17 +1,23 @@
+import { Alert } from "react-native";
 import { useState } from "react";
-import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { useTheme } from "styled-components";
-import { supabase } from "../../services/supabase";
 
 import { Button } from "../../components/Button";
 import { Divider } from "../../components/Divider";
 import { Text } from "../../components/Text";
 
-import { ButtonBox, Content, Input, FormWrapper } from "./styles";
+import { ButtonBox, Content, FormWrapper, FormHeader } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { useUserStore } from "../../stores/user";
 import { cineAPI } from "../../services/api";
 import { AuthError } from "@supabase/supabase-js";
+import { UncontrolledInput } from "../../components/Input";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createUserFormSchema } from "../../schemas/createUserFormSchema";
+import { z } from "zod";
+
+type FormData = z.infer<typeof createUserFormSchema>;
 
 export const SignUp = () => {
   const navigation = useNavigation();
@@ -24,12 +30,24 @@ export const SignUp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<AuthError | null>(null);
 
-  const handleSignUp = async () => {
+  const { control, handleSubmit } = useForm<FormData>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    resolver: zodResolver(createUserFormSchema),
+  });
+
+  const onSubmit = handleSubmit(async (data) => {
     setLoading(true);
     try {
-      const response = await cineAPI.signUpUser(name, email, password);
+      const response = await cineAPI.signUpUser(
+        data.name,
+        data.email,
+        data.password
+      );
       if (response.error) {
-        return setError(response.error);
+        Alert.alert("Error", response.error.message);
       }
 
       if (response.data.user) {
@@ -44,11 +62,11 @@ export const SignUp = () => {
         });
       }
     } catch (error) {
-      console.log(error);
+      Alert.alert("Error", "An error occurred, please try again.");
     } finally {
       setLoading(false);
     }
-  };
+  });
 
   const navigateToSignIn = () => {
     navigation.navigate("SignIn");
@@ -57,21 +75,34 @@ export const SignUp = () => {
   return (
     <Content>
       <FormWrapper>
-        <Text weight="Bold" size={24}>
-          Create an account
-        </Text>
-        <Text color={theme.colors.text.muted} size={16}>
-          Access your tickets
-        </Text>
+        <FormHeader>
+          <Text weight="Bold" size={24}>
+            Create an account
+          </Text>
+          <Text color={theme.colors.text.muted} size={16}>
+            Access your tickets
+          </Text>
+        </FormHeader>
+
         <Divider top={16} />
-        <Input placeholder="Name" onChangeText={setName} />
+        <UncontrolledInput name="name" control={control} placeholder="Name" />
         <Divider top={10} />
-        <Input placeholder="Email" onChangeText={setEmail} />
+        <UncontrolledInput
+          name="email"
+          control={control}
+          placeholder="E-mail"
+          autoCapitalize="none"
+        />
         <Divider top={10} />
-        <Input placeholder="Password" onChangeText={setPassword} />
+        <UncontrolledInput
+          name="password"
+          control={control}
+          placeholder="Password"
+          secureTextEntry
+        />
         <Divider top={10} />
         <ButtonBox>
-          <Button label="Continue" onPress={handleSignUp} loading={loading} />
+          <Button label="Continue" onPress={onSubmit} loading={loading} />
         </ButtonBox>
       </FormWrapper>
 

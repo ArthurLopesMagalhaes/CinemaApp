@@ -15,17 +15,9 @@ export const ButtonBox = styled.View`
 export const FormWrapper = styled.View`
   width: 100%;
   justify-content: center;
-  align-items: center;
   flex: 1;
 `;
 
-export const Input = styled.TextInput.attrs((props) => ({
-  placeholderTextColor: props.theme.colors.text.muted,
-}))`
-  width: 100%;
-  border: 1px solid ${(props) => props.theme.colors.border.main};
-  border-radius: 8px;
-  height: 56px;
-  padding: 16px;
-  color: ${(props) => props.theme.colors.text.main};
+export const FormHeader = styled.View`
+  align-items: center;
 `;
