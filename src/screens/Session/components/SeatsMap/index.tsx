@@ -12,7 +12,6 @@ import { Text } from "@components/Text";
 import { Seat } from "../Seat";
 
 import { useCartStore } from "@stores/cart";
-import { useTicketStore } from "@stores/tickets";
 
 export type Seat = {
   id: string;
@@ -32,7 +31,7 @@ export const SeatsMap = ({
   onSeatPress,
 }: SeatsMapProps) => {
   const theme = useTheme();
-  const tickets = useTicketStore((state) => state.tickets);
+
   const cart = useCartStore((state) => state.cart);
 
   const defineStatus = (seat: Seat) => {

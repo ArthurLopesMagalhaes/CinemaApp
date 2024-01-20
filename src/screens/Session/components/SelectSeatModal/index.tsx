@@ -11,7 +11,6 @@ import { TicketTypeButton } from "./components/TicketTypeButton";
 import { BottomSheetBackdrop, BottomSheetProps } from "@gorhom/bottom-sheet";
 import BottomSheet from "@gorhom/bottom-sheet";
 import { useCartStore } from "@stores/cart";
-import { TicketType, useTicketStore } from "@stores/tickets";
 
 type ModalSelectSeatProps = {
   seat: string;
@@ -24,7 +23,6 @@ export const ModalSelectSeat = forwardRef(
     const theme = useTheme();
     const snapPoints = useMemo(() => ["50%"], []);
 
-    // const addTicket = useTicketStore((state) => state.addTicket);
     const addTicket = useCartStore((state) => state.addTicket);
 
     const handleSelection = (

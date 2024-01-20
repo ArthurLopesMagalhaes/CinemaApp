@@ -12,25 +12,19 @@ import { Text } from "@components/Text";
 import { cineAPI } from "@services/api";
 import { supabase } from "@services/supabase";
 
+import { useSessionStore } from "@stores/session";
 import { UserType, useUserStore } from "@stores/user";
 
 export const Home = () => {
   const navigation = useNavigation();
   const user = useUserStore((state) => state.user);
+  const session = useSessionStore((state) => state.session);
   const setUser = useUserStore((state) => state.setUser);
 
   const [movies, setMovies] = useState<Movie[]>([]);
 
   const goToProfile = () => {
     navigation.navigate("Profile");
-  };
-
-  const checkUser = async () => {
-    // Maybe don't need this after implement AsyncStorage
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    setUser({ email: user?.email, role: user?.role, id: user?.id } as UserType);
   };
 
   const getMovies = async () => {
@@ -41,7 +35,6 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    checkUser();
     getMovies();
   }, []);
 
@@ -49,11 +42,9 @@ export const Home = () => {
     <Container>
       <Header
         onButtonPress={
-          user?.role === "authenticated"
-            ? goToProfile
-            : () => navigation.navigate("SignIn")
+          session ? goToProfile : () => navigation.navigate("SignIn")
         }
-        userLogged={user?.role === "authenticated"}
+        userLogged={!!session}
       />
       <Content>
         <Text weight="Bold" size={24}>

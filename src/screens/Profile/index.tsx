@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Alert, FlatList } from "react-native";
-// import { QrCode } from "phosphor-react-native";
 import { useCameraPermission } from "react-native-vision-camera";
 
+// import { QrCode } from "phosphor-react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import BackSvg from "@assets/back.svg";
@@ -19,6 +19,7 @@ import { supabase } from "@services/supabase";
 
 import { TicketListItem } from "./components/TicketListItem";
 
+import { useSessionStore } from "@stores/session";
 import { useUserStore } from "@stores/user";
 
 export type TicketType = {
@@ -38,11 +39,11 @@ export type TicketType = {
 
 export const Profile = () => {
   const { hasPermission, requestPermission } = useCameraPermission();
-  console.log(hasPermission);
 
   const navigation = useNavigation();
   const user = useUserStore((state) => state.user);
   const clearUser = useUserStore((state) => state.clearUser);
+  const clearSession = useSessionStore((state) => state.clearSession);
 
   const [tickets, setTickets] = useState<TicketType[] | null>(null);
 
@@ -56,7 +57,6 @@ export const Profile = () => {
     seat: string,
     type: string,
   ) => {
-    console.log(date);
     navigation.navigate("Ticket", {
       ticketInfo: {
         id,
@@ -77,6 +77,7 @@ export const Profile = () => {
       routes: [{ name: "Home" }],
     });
     clearUser();
+    clearSession();
   };
 
   const getUserTickets = async () => {
@@ -95,8 +96,6 @@ export const Profile = () => {
     getUserTickets();
   }, []);
 
-  console.log(user);
-
   return (
     <Container>
       <TopBar
@@ -108,7 +107,7 @@ export const Profile = () => {
       />
       <Content>
         <Text size={22} weight="Bold">
-          Welcome, Arthur 👋
+          Welcome, {user.name} 👋
         </Text>
 
         <Divider top={20} />
@@ -132,7 +131,7 @@ export const Profile = () => {
           ItemSeparatorComponent={() => <Divider top={12} />}
         />
       </Content>
-      {user.role === "admin" && (
+      {user.function === "admin" && (
         <Footer>
           <ScanButton onPress={handleQrCodeScanPress}>
             {/* <QrCode color="#ffff" size={40} /> */}

@@ -25,11 +25,10 @@ export const cineAPI = {
     });
     return { data, error };
   },
-  getUser: async (userId: string) => {
+  getUser: async () => {
     const { data, error } = await supabase
       .from("users")
       .select("*")
-      .eq("user_id", userId)
       .limit(1)
       .single();
     return { data, error };

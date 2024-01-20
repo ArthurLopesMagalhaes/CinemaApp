@@ -180,21 +180,21 @@ export interface Database {
       users: {
         Row: {
           email: string;
+          function: string;
           id: string;
           name: string;
-          role: string;
         };
         Insert: {
           email: string;
+          function?: string;
           id: string;
           name: string;
-          role?: string;
         };
         Update: {
           email?: string;
+          function?: string;
           id?: string;
           name?: string;
-          role?: string;
         };
         Relationships: [
           {

@@ -25,7 +25,7 @@ export const Header = ({ onButtonPress, userLogged }: HeaderProps) => {
       </ImageBox>
       <LocationBox>
         <LocationSvg width={20} />
-        <Text>Viçosa - MG</Text>
+        <Text>CINE APP</Text>
       </LocationBox>
       <ButtonBox>
         {/* Use a userPhoto here instead of a button */}

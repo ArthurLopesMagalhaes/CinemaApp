@@ -7323,7 +7323,7 @@ sudo-prompt@^9.0.0:
   resolved "https://registry.npmjs.org/sudo-prompt/-/sudo-prompt-9.2.1.tgz"
   integrity sha512-Mu7R0g4ig9TUuGSxJavny5Rv0egCEtpZRNMrZaYS1vxkiIxGiGUwoezU3LazIQ+KE04hTrTfNPgxU5gzi7F5Pw==
 
-supabase@>=1.8.1:
+supabase@^1.131.5:
   version "1.131.5"
   resolved "https://registry.yarnpkg.com/supabase/-/supabase-1.131.5.tgz#4a2c98335b37f45263c53e0ecbaac90ed15cb802"
   integrity sha512-YJ9qoNac+dq521btw6kgqnJEwf6zRsegvooHM1QuxbOzVuL40eqrrNykTue3iCu3/qkVutcq3XPmdPO3TbXaiw==

@@ -47,14 +47,17 @@ export const SignUp = () => {
         data.password,
       );
       if (response.error) {
-        Alert.alert("Error", response.error.message);
+        return Alert.alert("Error", response.error.message);
       }
+
+      const user = await cineAPI.getUser();
 
       if (response.data.user) {
         setUser({
           id: response.data.user.id,
           email: response.data.user.email,
-          role: response.data.user.role,
+          name: user.data?.name,
+          function: user.data?.function,
         });
         navigation.reset({
           index: 0,
