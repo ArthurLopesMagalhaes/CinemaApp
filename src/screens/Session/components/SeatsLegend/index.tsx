@@ -1,10 +1,12 @@
 import { SvgProps } from "react-native-svg";
+
 import { useTheme } from "styled-components";
 
-import { Text } from "../../../../components/Text";
+import CloseSvg from "@assets/close.svg";
+
 import { Circle, Container, SeatLegendWrapper } from "./styles";
 
-import CloseSvg from "../../../../assets/close.svg";
+import { Text } from "@components/Text";
 
 export type SeatLegendStyleProps = {
   circleBackground: string;

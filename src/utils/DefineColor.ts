@@ -1,5 +1,6 @@
-import { SeatProps } from "../screens/Session/components/Seat";
-import { theme } from "../global/theme";
+import { SeatProps } from "@screens/Session/components/Seat";
+
+import { theme } from "@global/theme";
 
 export const defineColor = (status: string) => {
   switch (status) {

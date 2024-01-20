@@ -1,8 +1,9 @@
 import { Image, StatusBar } from "react-native";
-import { ImageBg } from "./styles";
 
-import LogoPng from "../../assets/logo.png";
-import OverlayPng from "../../assets/overlay.png";
+import LogoPng from "@assets/logo.png";
+import OverlayPng from "@assets/overlay.png";
+
+import { ImageBg } from "./styles";
 
 export const Splash = () => {
   return (

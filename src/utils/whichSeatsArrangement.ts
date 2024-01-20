@@ -14,7 +14,7 @@ type SessionsData = {
 
 export const whichSeatsArrangement = (
   sessionsData: SessionsData,
-  selectedSessionId: string
+  selectedSessionId: string,
 ): seatsArrangement => {
   let selectedSeatsArrangement: seatsArrangement = [];
 

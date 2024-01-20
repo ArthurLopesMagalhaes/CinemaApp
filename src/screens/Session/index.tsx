@@ -1,21 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import BottomSheet from "@gorhom/bottom-sheet";
-import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
+import React, { useEffect, useRef, useState } from "react";
+
 import { useNavigation, useRoute } from "@react-navigation/native";
 
-import { useTicketStore } from "../../stores/tickets";
-import { cineAPI } from "../../services/api";
-
-import { Loading } from "../../components/Loading";
-import { ModalSelectSeat } from "./components/SelectSeatModal";
-import { SeatsLegendBox } from "./components/SeatsLegend";
-import { SeatsMap } from "./components/SeatsMap";
-import { Text } from "../../components/Text";
-import { TopBar } from "../../components/TopBar";
-
-import BackSvg from "../../assets/back.svg";
-import CalendarSvg from "../../assets/calendar.svg";
-import ClockSvg from "../../assets/clock.svg";
+import BackSvg from "@assets/back.svg";
+import CalendarSvg from "@assets/calendar.svg";
+import ClockSvg from "@assets/clock.svg";
 
 import {
   Bottom,
@@ -25,16 +14,28 @@ import {
   DateAndTimeButton,
   TopFixed,
 } from "./styles";
-import { SelectDateAndTimeModal } from "./components/SelectDateAndTimeModal";
-import { Divider } from "../../components/Divider";
-import { Database } from "../../lib/database.types";
-import { whichSeatsArrangement } from "../../utils/whichSeatsArrangement";
 
-import { useCartStore } from "../../stores/cart";
-import { Button } from "../../components/Button";
-import { getUpdatedSeats } from "../../utils/getUpdatedSeats";
-import { getTicketsIdFromCart } from "../../utils/getTicketsIdFromCart";
-import { useMovieStore } from "../../stores/movie";
+import { Button } from "@components/Button";
+import { Divider } from "@components/Divider";
+import { Loading } from "@components/Loading";
+import { Text } from "@components/Text";
+import { TopBar } from "@components/TopBar";
+
+import { whichSeatsArrangement } from "@utils/whichSeatsArrangement";
+
+import { cineAPI } from "@services/api";
+
+import { Database } from "@lib/database.types";
+
+import { SeatsLegendBox } from "./components/SeatsLegend";
+import { SeatsMap } from "./components/SeatsMap";
+import { SelectDateAndTimeModal } from "./components/SelectDateAndTimeModal";
+import { ModalSelectSeat } from "./components/SelectSeatModal";
+
+import BottomSheet from "@gorhom/bottom-sheet";
+import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
+import { useCartStore } from "@stores/cart";
+import { useMovieStore } from "@stores/movie";
 
 export type SessionsData = Database["public"]["Tables"]["sessions"]["Row"];
 

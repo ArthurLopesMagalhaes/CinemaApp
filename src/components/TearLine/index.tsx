@@ -1,5 +1,6 @@
+import { Circle, Circles, Container } from "./styles";
+
 import { Text } from "../Text";
-import { Container, Circles, Circle } from "./styles";
 
 const NUMBER_OF_CIRCLES = 17;
 

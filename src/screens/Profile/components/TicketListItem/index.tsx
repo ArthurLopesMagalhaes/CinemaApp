@@ -1,15 +1,17 @@
-import { View } from "react-native";
-import { TicketType } from "../..";
-import { Text } from "../../../../components/Text";
-import { formatDate } from "../../../../utils/formatDate";
 import {
   Container,
   InfoBox,
-  InfoBoxTop,
   InfoBoxBottom,
+  InfoBoxTop,
   MovieImg,
   Overlay,
 } from "./styles";
+
+import { Text } from "@components/Text";
+
+import { formatDate } from "@utils/formatDate";
+
+import { TicketType } from "../..";
 
 type TicketListItemType = {
   data: TicketType;

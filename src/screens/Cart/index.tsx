@@ -1,26 +1,33 @@
+import { useEffect, useState } from "react";
 import { Alert, View } from "react-native";
-import { useState, useEffect } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { useStripe } from "@stripe/stripe-react-native";
+
 import { useTheme } from "styled-components";
 
-import BackSvg from "../../assets/back.svg";
-import { Container, Row, TopInfo, BottomInfo, Footer } from "./styles";
-import { Text } from "../../components/Text";
-import { TopBar } from "../../components/TopBar";
-import { TearLine } from "../../components/TearLine";
-import { Button } from "../../components/Button";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-import { useMovieStore } from "../../stores/movie";
-import { useCartStore } from "../../stores/cart";
-import { useUserStore } from "../../stores/user";
-import { cineAPI } from "../../services/api";
-import { StripeAPI } from "../../services/stripeAPI";
-import { getUpdatedSeats } from "../../utils/getUpdatedSeats";
-import { getTicketsIdFromCart } from "../../utils/getTicketsIdFromCart";
+import BackSvg from "@assets/back.svg";
+
+import { BottomInfo, Container, Footer, Row, TopInfo } from "./styles";
+
+import { Button } from "@components/Button";
+import { TearLine } from "@components/TearLine";
+import { Text } from "@components/Text";
+import { TopBar } from "@components/TopBar";
+
+import { calculateCartAmountPrice } from "@utils/calculateCartAmountPrice";
+import { formatDate } from "@utils/formatDate";
+import { getTicketsIdFromCart } from "@utils/getTicketsIdFromCart";
+import { getUpdatedSeats } from "@utils/getUpdatedSeats";
+
+import { cineAPI } from "@services/api";
+import { StripeAPI } from "@services/stripeAPI";
+
 import { SessionsData } from "../Session";
-import { formatDate } from "../../utils/formatDate";
-import { calculateCartAmountPrice } from "../../utils/calculateCartAmountPrice";
+
+import { useCartStore } from "@stores/cart";
+import { useMovieStore } from "@stores/movie";
+import { useUserStore } from "@stores/user";
+import { useStripe } from "@stripe/stripe-react-native";
 
 type RouteParams = {
   sessionData: SessionsData;
@@ -46,11 +53,11 @@ export const Cart = () => {
   const updateSession = async () => {
     const newSeatsArrangement = getUpdatedSeats(
       [...sessionData.seats_arrangement],
-      getTicketsIdFromCart(cart.tickets)
+      getTicketsIdFromCart(cart.tickets),
     );
     const response = await cineAPI.updateSession(
       sessionData.id,
-      newSeatsArrangement
+      newSeatsArrangement,
     );
     clearCart();
   };
@@ -59,7 +66,7 @@ export const Cart = () => {
     const { paymentIntent, ephemeralKey, customer, publishableKey } =
       await StripeAPI.fetchPaymentSheetParams(
         calculateCartAmountPrice(cart.tickets) * 100, // Stripe method (has to be in cents)
-        "eren@gmai.com"
+        "eren@gmai.com",
       );
 
     const { error } = await initPaymentSheet({
@@ -94,7 +101,7 @@ export const Cart = () => {
           ticket_type: ticket.type,
           order_id: responseOrder.data![0].id,
           session_id: sessionData.id,
-        }))
+        })),
       );
       updateSession();
       Alert.alert("Success", "Your order is confirmed!");

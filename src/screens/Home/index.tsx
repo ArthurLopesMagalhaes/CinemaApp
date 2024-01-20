@@ -1,18 +1,18 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import BottomSheet from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet";
-import { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
+import { useEffect, useState } from "react";
+
+import { useNavigation } from "@react-navigation/native";
+
 import { Container, Content } from "./styles";
 
-import { Divider } from "../../components/Divider";
-import { Header } from "../../components/Header";
+import { Divider } from "@components/Divider";
+import { Header } from "@components/Header";
+import { Movie, MovieList } from "@components/MovieList";
+import { Text } from "@components/Text";
 
-import { Movie, MovieList } from "../../components/MovieList";
-import { Text } from "../../components/Text";
-import { supabase } from "../../services/supabase";
+import { cineAPI } from "@services/api";
+import { supabase } from "@services/supabase";
 
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
-import { UserType, useUserStore } from "../../stores/user";
-import { cineAPI } from "../../services/api";
+import { UserType, useUserStore } from "@stores/user";
 
 export const Home = () => {
   const navigation = useNavigation();

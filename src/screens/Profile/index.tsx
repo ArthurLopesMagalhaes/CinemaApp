@@ -1,21 +1,25 @@
-import { Alert, Button, FlatList } from "react-native";
+import { useEffect, useState } from "react";
+import { Alert, FlatList } from "react-native";
 // import { QrCode } from "phosphor-react-native";
 import { useCameraPermission } from "react-native-vision-camera";
 
-import { Container, Content, Footer, ScanButton } from "./styles";
-import { Text } from "../../components/Text";
-
-import { supabase } from "../../services/supabase";
 import { useNavigation } from "@react-navigation/native";
-import { TopBar } from "../../components/TopBar";
 
-import BackSvg from "../../assets/back.svg";
-import LogoutSvg from "../../assets/logout.svg";
-import { useUserStore } from "../../stores/user";
-import { Divider } from "../../components/Divider";
+import BackSvg from "@assets/back.svg";
+import LogoutSvg from "@assets/logout.svg";
+
+import { Container, Content, Footer, ScanButton } from "./styles";
+
+import { Divider } from "@components/Divider";
+import { Text } from "@components/Text";
+import { TopBar } from "@components/TopBar";
+
+import { cineAPI } from "@services/api";
+import { supabase } from "@services/supabase";
+
 import { TicketListItem } from "./components/TicketListItem";
-import { useEffect, useState } from "react";
-import { cineAPI } from "../../services/api";
+
+import { useUserStore } from "@stores/user";
 
 export type TicketType = {
   id: string;
@@ -50,7 +54,7 @@ export const Profile = () => {
     id: string,
     date: string,
     seat: string,
-    type: string
+    type: string,
   ) => {
     console.log(date);
     navigation.navigate("Ticket", {
@@ -111,6 +115,7 @@ export const Profile = () => {
         <FlatList
           data={tickets}
           keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
           renderItem={({ item, index }) => (
             <TicketListItem
               data={item}
@@ -119,7 +124,7 @@ export const Profile = () => {
                   item.id,
                   item.sessions!.date_and_time,
                   item.seat_position,
-                  item.ticket_type
+                  item.ticket_type,
                 )
               }
             />

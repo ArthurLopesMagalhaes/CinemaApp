@@ -1,6 +1,5 @@
-import { Database } from "../lib/database.types";
-import { Seat } from "../screens/Session/components/SeatsMap";
-import { useUserStore } from "../stores/user";
+import { Database } from "@lib/database.types";
+
 import { supabase } from "./supabase";
 
 export type SeatsArrangementType =
@@ -56,7 +55,7 @@ export const cineAPI = {
   },
   updateSession: async (
     sessionId: string,
-    newSeatsArrangement: SeatsArrangementType
+    newSeatsArrangement: SeatsArrangementType,
   ) => {
     const { data, error } = await supabase
       .from("sessions")
@@ -82,7 +81,7 @@ export const cineAPI = {
       ticket_type: string;
       order_id: string;
       session_id: string;
-    }[]
+    }[],
   ) => {
     const { data, error } = await supabase
       .from("tickets")
@@ -104,7 +103,7 @@ export const cineAPI = {
       sessions (
         date_and_time
       )
-    `
+    `,
       )
       .order("status", { ascending: true })
       .eq("user_id", userId);

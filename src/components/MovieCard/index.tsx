@@ -1,11 +1,13 @@
 import { Dimensions } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+
 import { useTheme } from "styled-components";
 
-import { Text } from "../Text";
+import { useNavigation } from "@react-navigation/native";
 
 import { Container, MovieImage, MovieRating } from "./styles";
+
 import { Movie } from "../MovieList";
+import { Text } from "../Text";
 
 const { width: SCREEN_WIDTH } = Dimensions.get("screen");
 const MOVIE_WIDTH = (SCREEN_WIDTH - 52) / 2;

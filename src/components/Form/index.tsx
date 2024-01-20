@@ -1,8 +1,10 @@
 import { useTheme } from "styled-components";
+
+import { ButtonBox, Content, Input } from "./styles";
+
 import { Button } from "../Button";
 import { Divider } from "../Divider";
 import { Text } from "../Text";
-import { ButtonBox, Content, Input } from "./styles";
 
 export const Form = () => {
   const theme = useTheme();

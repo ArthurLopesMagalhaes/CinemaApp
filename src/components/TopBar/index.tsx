@@ -1,10 +1,11 @@
 import { TouchableOpacity } from "react-native";
 import { SvgProps } from "react-native-svg";
+
 import { useTheme } from "styled-components";
 
-import { Text } from "../Text";
-
 import { Container, Left, Medium, Right } from "./styles";
+
+import { Text } from "../Text";
 
 type TopBarProps = {
   title: string;

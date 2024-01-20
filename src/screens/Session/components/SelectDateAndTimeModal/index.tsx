@@ -1,15 +1,18 @@
+import { forwardRef, useMemo } from "react";
+
+import { Content, DateTimeContainer, styles } from "./styles";
+
+import { Text } from "@components/Text";
+
+import { formatDate } from "@utils/formatDate";
+
+import { SessionsData } from "../..";
+
 import {
   BottomSheetBackdrop,
   BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
 import BottomSheet from "@gorhom/bottom-sheet";
-
-import { Content, DateTimeContainer, styles } from "./styles";
-import { Text } from "../../../../components/Text";
-
-import { forwardRef, useMemo } from "react";
-import { formatDate } from "../../../../utils/formatDate";
-import { SessionsData } from "../..";
 
 type Props = {
   data: SessionsData[];
@@ -54,5 +57,5 @@ export const SelectDateAndTimeModal = forwardRef(
         </Content>
       </BottomSheet>
     );
-  }
+  },
 );

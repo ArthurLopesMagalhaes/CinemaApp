@@ -1,17 +1,18 @@
-import { ReactNode } from "react";
-import { Column, ScreenBox } from "./styles";
 import { ScrollView, View } from "react-native";
-import { Seat } from "../Seat";
-import { useNavigation } from "@react-navigation/native";
+
 import { useTheme } from "styled-components";
 
-import ScreenSVG from "../../../../assets/screen.svg";
-import { Divider } from "../../../../components/Divider";
-import { Text } from "../../../../components/Text";
-import { SeatMock } from "../../../../mocks/seats.mock";
-import { Json } from "../../../../lib/database.types";
-import { useTicketStore } from "../../../../stores/tickets";
-import { useCartStore } from "../../../../stores/cart";
+import ScreenSVG from "@assets/screen.svg";
+
+import { Column, ScreenBox } from "./styles";
+
+import { Divider } from "@components/Divider";
+import { Text } from "@components/Text";
+
+import { Seat } from "../Seat";
+
+import { useCartStore } from "@stores/cart";
+import { useTicketStore } from "@stores/tickets";
 
 export type Seat = {
   id: string;

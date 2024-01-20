@@ -1,4 +1,5 @@
 import { create } from "zustand";
+
 import { Database } from "../lib/database.types";
 
 type MovieType = Database["public"]["Tables"]["movies"]["Row"];

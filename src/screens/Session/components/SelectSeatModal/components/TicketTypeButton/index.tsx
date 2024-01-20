@@ -1,7 +1,10 @@
 import { useTheme } from "styled-components";
-import { Text } from "../../../../../../components/Text";
+
 import { Container } from "./styles";
-import { TicketType } from "../../../../../../utils/ticketType";
+
+import { Text } from "@components/Text";
+
+import { TicketType } from "@utils/ticketType";
 
 type TicketTypeButtonProps = {
   type: TicketType;

@@ -8,9 +8,9 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 
-import { Container } from "./styles";
+import LoaderSVG from "@assets/loader.svg";
 
-import LoaderSVG from "../../assets/loader.svg";
+import { Container } from "./styles";
 
 export const Loading = () => {
   const rotation = useSharedValue(0);
@@ -30,7 +30,7 @@ export const Loading = () => {
         duration: 1500,
         easing: Easing.linear,
       }),
-      -1
+      -1,
     );
     return () => cancelAnimation(rotation);
   }, []);

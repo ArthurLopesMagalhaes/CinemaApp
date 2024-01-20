@@ -1,21 +1,25 @@
-import { Alert } from "react-native";
 import { useState } from "react";
-import { useTheme } from "styled-components";
-
-import { Button } from "../../components/Button";
-import { Divider } from "../../components/Divider";
-import { Text } from "../../components/Text";
-
-import { ButtonBox, Content, FormWrapper, FormHeader } from "./styles";
-import { useNavigation } from "@react-navigation/native";
-import { useUserStore } from "../../stores/user";
-import { cineAPI } from "../../services/api";
-import { AuthError } from "@supabase/supabase-js";
-import { UncontrolledInput } from "../../components/Input";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { createUserFormSchema } from "../../schemas/createUserFormSchema";
+import { Alert } from "react-native";
+
+import { useTheme } from "styled-components";
 import { z } from "zod";
+
+import { useNavigation } from "@react-navigation/native";
+
+import { ButtonBox, Content, FormHeader, FormWrapper } from "./styles";
+
+import { Button } from "@components/Button";
+import { Divider } from "@components/Divider";
+import { UncontrolledInput } from "@components/Input";
+import { Text } from "@components/Text";
+
+import { cineAPI } from "@services/api";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createUserFormSchema } from "@schemas/createUserFormSchema";
+import { useUserStore } from "@stores/user";
+import { AuthError } from "@supabase/supabase-js";
 
 type FormData = z.infer<typeof createUserFormSchema>;
 
@@ -24,11 +28,7 @@ export const SignUp = () => {
   const theme = useTheme();
   const setUser = useUserStore((state) => state.setUser);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<AuthError | null>(null);
 
   const { control, handleSubmit } = useForm<FormData>({
     defaultValues: {
@@ -44,7 +44,7 @@ export const SignUp = () => {
       const response = await cineAPI.signUpUser(
         data.name,
         data.email,
-        data.password
+        data.password,
       );
       if (response.error) {
         Alert.alert("Error", response.error.message);

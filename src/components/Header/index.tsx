@@ -1,13 +1,14 @@
 import { Image, TouchableOpacity } from "react-native";
+
 import { useTheme } from "styled-components";
 
-import { Button } from "../Button";
-import { Text } from "../Text";
+import LocationSvg from "@assets/location.svg";
+import Logo from "@assets/logo.png";
 
 import { Avatar, ButtonBox, Container, ImageBox, LocationBox } from "./styles";
 
-import LocationSvg from "../../assets/location.svg";
-import Logo from "../../assets/logo.png";
+import { Button } from "../Button";
+import { Text } from "../Text";
 
 type HeaderProps = {
   onButtonPress: () => void;

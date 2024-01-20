@@ -1,12 +1,13 @@
-import { SvgProps } from "react-native-svg";
+import CloseSVG from "@assets/close.svg";
 
-import { Text } from "../../../../components/Text";
-import { defineColor } from "../../../../utils/defineColor";
 import { Container } from "./styles";
 
-import CloseSVG from "../../../../assets/close.svg";
-import { defineDisable } from "../../../../utils/defineDisable";
-import { useCartStore } from "../../../../stores/cart";
+import { Text } from "@components/Text";
+
+import { defineColor } from "@utils/defineColor";
+import { defineDisable } from "@utils/defineDisable";
+
+import { useCartStore } from "@stores/cart";
 
 export type SeatProps = {
   id: string;

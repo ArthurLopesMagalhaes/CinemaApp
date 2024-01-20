@@ -1,5 +1,6 @@
-import { TicketType } from "../stores/cart";
 import { ticketPrice } from "./ticketType";
+
+import { TicketType } from "@stores/cart";
 
 export const calculateCartAmountPrice = (tickets: TicketType[]) => {
   let amount = 0;

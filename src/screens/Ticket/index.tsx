@@ -1,6 +1,10 @@
-import { useTheme } from "styled-components";
-import { useRoute } from "@react-navigation/native";
 import QRCode from "react-native-qrcode-svg";
+
+import { useTheme } from "styled-components";
+
+import { useRoute } from "@react-navigation/native";
+
+import CloseSvg from "@assets/close.svg";
 
 import {
   BottomView,
@@ -9,20 +13,17 @@ import {
   LabelsRow,
   QrCodeContainer,
   QrCodeContent,
-  QrCodeImage,
   RefundButton,
   TicketInfos,
 } from "./styles";
 
-import { Button } from "../../components/Button";
-import { Divider } from "../../components/Divider";
-import { TearLine } from "../../components/TearLine";
-import { Text } from "../../components/Text";
-import { TopBar } from "../../components/TopBar";
+import { Button } from "@components/Button";
+import { Divider } from "@components/Divider";
+import { TearLine } from "@components/TearLine";
+import { Text } from "@components/Text";
+import { TopBar } from "@components/TopBar";
 
-import CloseSvg from "../../assets/close.svg";
-import QrCodePng from "../../assets/qrcode.png";
-import { formatDate } from "../../utils/formatDate";
+import { formatDate } from "@utils/formatDate";
 
 export type TicketInfo = {
   id: string;

@@ -1,14 +1,16 @@
-import { TextInputProps } from "react-native";
 import {
-  Control,
   Controller,
   FieldPath,
   FieldValues,
   UseControllerProps,
 } from "react-hook-form";
-import { Text } from "../Text";
-import { Input } from "./styles";
+import { TextInputProps } from "react-native";
+
 import { useTheme } from "styled-components";
+
+import { Input } from "./styles";
+
+import { Text } from "../Text";
 
 type InputProps<
   TFieldValues extends FieldValues,

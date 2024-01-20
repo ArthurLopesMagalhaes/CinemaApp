@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-import { theme } from "../../global/theme";
+import { theme } from "@global/theme";
 
 export const Content = styled.View`
   flex: 1;

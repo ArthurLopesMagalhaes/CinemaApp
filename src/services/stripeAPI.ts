@@ -13,7 +13,7 @@ export const StripeAPI = {
           amount,
           email,
         }),
-      }
+      },
     );
 
     const { paymentIntent, ephemeralKey, customer, publishableKey } =

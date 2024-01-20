@@ -1,21 +1,24 @@
 import { useState } from "react";
-import { Alert } from "react-native";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { Alert } from "react-native";
+
 import { useTheme } from "styled-components";
+import { z } from "zod";
 
-import { Button } from "../../components/Button";
-import { Divider } from "../../components/Divider";
-import { Text } from "../../components/Text";
-
-import { ButtonBox, Content, FormWrapper, FormHeader } from "./styles";
 import { useNavigation } from "@react-navigation/native";
-import { useUserStore } from "../../stores/user";
-import { cineAPI } from "../../services/api";
 
-import { UncontrolledInput } from "../../components/Input";
-import { loginUserFormSchema } from "../../schemas/loginUserFormSchema";
+import { ButtonBox, Content, FormHeader, FormWrapper } from "./styles";
+
+import { Button } from "@components/Button";
+import { Divider } from "@components/Divider";
+import { UncontrolledInput } from "@components/Input";
+import { Text } from "@components/Text";
+
+import { cineAPI } from "@services/api";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginUserFormSchema } from "@schemas/loginUserFormSchema";
+import { useUserStore } from "@stores/user";
 
 type FormData = z.infer<typeof loginUserFormSchema>;
 

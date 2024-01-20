@@ -4,8 +4,10 @@ import {
   useCameraDevice,
   useCodeScanner,
 } from "react-native-vision-camera";
-import { Loading } from "../../components/Loading";
-import { cineAPI } from "../../services/api";
+
+import { Loading } from "@components/Loading";
+
+import { cineAPI } from "@services/api";
 
 export const CameraScan = () => {
   const device = useCameraDevice("back");

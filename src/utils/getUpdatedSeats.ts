@@ -8,7 +8,7 @@ type seatsArrangement = {
 
 export const getUpdatedSeats = (
   seatsArrangement: seatsArrangement,
-  selectedSeats: string[]
+  selectedSeats: string[],
 ) => {
   const newSeatsArrangement = [...seatsArrangement];
   selectedSeats.forEach((seat) => {

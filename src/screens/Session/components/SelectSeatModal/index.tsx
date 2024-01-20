@@ -1,14 +1,17 @@
-import { BottomSheetBackdrop, BottomSheetProps } from "@gorhom/bottom-sheet";
-import BottomSheet from "@gorhom/bottom-sheet";
-
-import { useTheme } from "styled-components";
-import { Content, TextsBox, styles } from "./styles";
-import { Text } from "../../../../components/Text";
-import { TicketTypeButton } from "./components/TicketTypeButton";
 import { forwardRef, useContext, useMemo } from "react";
 
-import { TicketType, useTicketStore } from "../../../../stores/tickets";
-import { useCartStore } from "../../../../stores/cart";
+import { useTheme } from "styled-components";
+
+import { Content, TextsBox, styles } from "./styles";
+
+import { Text } from "@components/Text";
+
+import { TicketTypeButton } from "./components/TicketTypeButton";
+
+import { BottomSheetBackdrop, BottomSheetProps } from "@gorhom/bottom-sheet";
+import BottomSheet from "@gorhom/bottom-sheet";
+import { useCartStore } from "@stores/cart";
+import { TicketType, useTicketStore } from "@stores/tickets";
 
 type ModalSelectSeatProps = {
   seat: string;
@@ -27,7 +30,7 @@ export const ModalSelectSeat = forwardRef(
     const handleSelection = (
       sessionId: string,
       seat: string,
-      ticketType: "Adult" | "Student"
+      ticketType: "Adult" | "Student",
     ) => {
       addTicket(sessionId, {
         id: seat,
@@ -79,5 +82,5 @@ export const ModalSelectSeat = forwardRef(
         </Content>
       </BottomSheet>
     );
-  }
+  },
 );

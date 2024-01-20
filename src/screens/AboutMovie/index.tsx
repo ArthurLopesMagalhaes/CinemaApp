@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, View } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
+
 import { useTheme } from "styled-components";
-import { cineAPI } from "../../services/api";
 
-import { Button } from "../../components/Button";
-import { Divider } from "../../components/Divider";
-import { Loading } from "../../components/Loading";
-import { Text } from "../../components/Text";
-import { TopBar } from "../../components/TopBar";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-import BackSvg from "../../assets/back.svg";
+import BackSvg from "@assets/back.svg";
 
 import {
   AboutMovieWrapper,
@@ -20,8 +14,18 @@ import {
   LabelsRow,
   MovieImg,
 } from "./styles";
-import { Database } from "../../lib/database.types";
-import { useMovieStore } from "../../stores/movie";
+
+import { Button } from "@components/Button";
+import { Divider } from "@components/Divider";
+import { Loading } from "@components/Loading";
+import { Text } from "@components/Text";
+import { TopBar } from "@components/TopBar";
+
+import { cineAPI } from "@services/api";
+
+import { Database } from "@lib/database.types";
+
+import { useMovieStore } from "@stores/movie";
 
 type RouteParams = {
   movieId: string;

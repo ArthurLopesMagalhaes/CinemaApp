@@ -1,9 +1,8 @@
 import { ActivityIndicator, TouchableOpacityProps } from "react-native";
-import { useTheme } from "styled-components";
-
-import { Text } from "../Text";
 
 import { Container } from "./styles";
+
+import { Text } from "../Text";
 
 export type ButtonProps = TouchableOpacityProps & {
   label: string;

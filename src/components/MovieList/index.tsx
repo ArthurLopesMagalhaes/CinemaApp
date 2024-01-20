@@ -3,8 +3,6 @@ import { FlatList } from "react-native";
 import { Divider } from "../Divider";
 import { MovieCard } from "../MovieCard";
 
-import { MovieMock } from "../../mocks/movie.mock";
-
 export type Movie = {
   id: string;
   title: string;
