@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { Alert, FlatList } from "react-native";
+import { Alert, FlatList, View } from "react-native";
 import { useCameraPermission } from "react-native-vision-camera";
+
+import LottieView from "lottie-react-native";
 
 // import { QrCode } from "phosphor-react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import BackSvg from "@assets/back.svg";
 import LogoutSvg from "@assets/logout.svg";
+import Sad from "@assets/lottie/sad.json";
 
 import { Container, Content, Footer, ScanButton } from "./styles";
 
 import { Divider } from "@components/Divider";
+import { EmptyList } from "@components/EmptyList";
 import { Text } from "@components/Text";
 import { TopBar } from "@components/TopBar";
 
@@ -115,6 +119,20 @@ export const Profile = () => {
           data={tickets}
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ flex: 1 }}
+          ListEmptyComponent={
+            <EmptyList text="No tickets yet">
+              <LottieView
+                source={Sad}
+                autoPlay
+                loop
+                style={{
+                  width: "100%",
+                  height: 200,
+                }}
+              />
+            </EmptyList>
+          }
           renderItem={({ item, index }) => (
             <TicketListItem
               data={item}
