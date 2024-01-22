@@ -26,6 +26,7 @@ import { cineAPI } from "@services/api";
 import { Database } from "@lib/database.types";
 
 import { useMovieStore } from "@stores/movie";
+import { useSessionStore } from "@stores/session";
 
 type RouteParams = {
   movieId: string;
@@ -37,6 +38,7 @@ export const AboutMovie = () => {
   const route = useRoute();
   const theme = useTheme();
   const navigation = useNavigation();
+  const session = useSessionStore((state) => state.session);
 
   const [loading, setLoading] = useState(true);
   const [movieData, setMovieData] = useState<MovieData>();
@@ -110,7 +112,11 @@ export const AboutMovie = () => {
       <Footer>
         <Button
           label="Select Session"
-          onPress={() => navigation.navigate("Session", { movieId })}
+          onPress={
+            session
+              ? () => navigation.navigate("Session", { movieId })
+              : () => navigation.navigate("SignIn")
+          }
         />
       </Footer>
     </Container>

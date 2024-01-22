@@ -2,18 +2,16 @@ import QRCode from "react-native-qrcode-svg";
 
 import { useTheme } from "styled-components";
 
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import CloseSvg from "@assets/close.svg";
 
 import {
   BottomView,
-  ButtonsBox,
   Container,
   LabelsRow,
   QrCodeContainer,
   QrCodeContent,
-  RefundButton,
   TicketInfos,
 } from "./styles";
 
@@ -39,12 +37,21 @@ type RouteParams = {
 export const Ticket = () => {
   const route = useRoute();
   const theme = useTheme();
+  const navigation = useNavigation();
 
   const { ticketInfo } = route.params as RouteParams;
 
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <Container contentContainerStyle={{ flex: 1 }}>
-      <TopBar title="Your Ticket" rightIcon={CloseSvg} />
+      <TopBar
+        title="Your Ticket"
+        rightIcon={CloseSvg}
+        onRightIconPress={goBack}
+      />
 
       <QrCodeContent>
         <QrCodeContainer>
@@ -84,12 +91,6 @@ export const Ticket = () => {
             <Text>{ticketInfo.type}</Text>
           </LabelsRow>
         </TicketInfos>
-        <ButtonsBox>
-          <RefundButton activeOpacity={0.75}>
-            <Text weight="Bold">Refund</Text>
-          </RefundButton>
-          <Button label="Send" />
-        </ButtonsBox>
       </BottomView>
     </Container>
   );

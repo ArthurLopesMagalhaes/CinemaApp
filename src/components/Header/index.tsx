@@ -4,6 +4,7 @@ import { useTheme } from "styled-components";
 
 import LocationSvg from "@assets/location.svg";
 import Logo from "@assets/logo.png";
+import UserPng from "@assets/user-placeholder.png";
 
 import { Avatar, ButtonBox, Container, ImageBox, LocationBox } from "./styles";
 
@@ -28,12 +29,9 @@ export const Header = ({ onButtonPress, userLogged }: HeaderProps) => {
         <Text>CINE APP</Text>
       </LocationBox>
       <ButtonBox>
-        {/* Use a userPhoto here instead of a button */}
         {userLogged ? (
           <TouchableOpacity onPress={onButtonPress}>
-            <Avatar
-              source={{ uri: "https://github.com/ArthurLopesMagalhaes.png" }}
-            />
+            <Avatar source={UserPng} />
           </TouchableOpacity>
         ) : (
           <Button label={"Log In"} onPress={onButtonPress} />

@@ -10,10 +10,9 @@ import { Movie, MovieList } from "@components/MovieList";
 import { Text } from "@components/Text";
 
 import { cineAPI } from "@services/api";
-import { supabase } from "@services/supabase";
 
 import { useSessionStore } from "@stores/session";
-import { UserType, useUserStore } from "@stores/user";
+import { useUserStore } from "@stores/user";
 
 export const Home = () => {
   const navigation = useNavigation();
