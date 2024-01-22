@@ -21,6 +21,8 @@ import { Loading } from "@components/Loading";
 import { Text } from "@components/Text";
 import { TopBar } from "@components/TopBar";
 
+import { formatDate } from "@utils/formatDate";
+import { formatTime } from "@utils/formatTime";
 import { whichSeatsArrangement } from "@utils/whichSeatsArrangement";
 
 import { cineAPI } from "@services/api";
@@ -120,18 +122,17 @@ export const Session = () => {
           >
             <CalendarSvg />
             <Text>
-              {selectedSession.date_and_time.slice(0, 7) || "-- / --"}
+              {formatDate(selectedSession.date_and_time) || "-- / --"}
             </Text>
             <Divider left={50} />
             <ClockSvg />
             <Text>
-              {selectedSession.date_and_time.slice(11, 16) || "-- : --"}
+              {formatTime(selectedSession.date_and_time) || "-- : --"}
             </Text>
           </DateAndTimeButton>
         </DateAndTimeBox>
       </TopFixed>
       <Bottom>
-        <Button label="LOG" onPress={() => console.log(cart.tickets)} />
         <SeatsLegendBox />
         <SeatsMap
           sessionId={selectedSession.id}

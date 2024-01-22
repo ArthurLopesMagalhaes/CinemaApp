@@ -23,7 +23,7 @@ import { TearLine } from "@components/TearLine";
 import { Text } from "@components/Text";
 import { TopBar } from "@components/TopBar";
 
-import { formatDate } from "@utils/formatDate";
+import { formatDateAndTime } from "@utils/formatDateAndTime";
 
 export type TicketInfo = {
   id: string;
@@ -69,7 +69,7 @@ export const Ticket = () => {
             <Text style={{ width: 80 }} color={theme.colors.text.muted}>
               Date
             </Text>
-            <Text>{formatDate(ticketInfo.date)}</Text>
+            <Text>{formatDateAndTime(ticketInfo.date)}</Text>
           </LabelsRow>
           <LabelsRow>
             <Text style={{ width: 80 }} color={theme.colors.text.muted}>

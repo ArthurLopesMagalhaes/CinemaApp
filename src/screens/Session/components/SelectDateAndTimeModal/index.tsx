@@ -10,15 +10,11 @@ import { Content, DateTimeContainer, styles } from "./styles";
 import { EmptyList } from "@components/EmptyList";
 import { Text } from "@components/Text";
 
-import { formatDate } from "@utils/formatDate";
+import { formatDateAndTime } from "@utils/formatDateAndTime";
 
 import { SessionsData } from "../..";
 
-import {
-  BottomSheetBackdrop,
-  BottomSheetFlatList,
-  BottomSheetScrollView,
-} from "@gorhom/bottom-sheet";
+import { BottomSheetBackdrop, BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import BottomSheet from "@gorhom/bottom-sheet";
 
 type Props = {
@@ -74,7 +70,7 @@ export const SelectDateAndTimeModal = forwardRef(
                 onPress={() => props.onPress(item)}
                 activeOpacity={0.7}
               >
-                <Text>{formatDate(item.date_and_time)}</Text>
+                <Text>{formatDateAndTime(item.date_and_time)}</Text>
               </DateTimeContainer>
             )}
           />

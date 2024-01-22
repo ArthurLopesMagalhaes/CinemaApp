@@ -15,7 +15,7 @@ import { Text } from "@components/Text";
 import { TopBar } from "@components/TopBar";
 
 import { calculateCartAmountPrice } from "@utils/calculateCartAmountPrice";
-import { formatDate } from "@utils/formatDate";
+import { formatDateAndTime } from "@utils/formatDateAndTime";
 import { getTicketsIdFromCart } from "@utils/getTicketsIdFromCart";
 import { getUpdatedSeats } from "@utils/getUpdatedSeats";
 
@@ -129,7 +129,9 @@ export const Cart = () => {
           <Text color={theme.colors.text.muted} style={{ width: 90 }}>
             Date
           </Text>
-          <Text weight="Medium">{formatDate(sessionData.date_and_time)}</Text>
+          <Text weight="Medium">
+            {formatDateAndTime(sessionData.date_and_time)}
+          </Text>
         </Row>
         <Row>
           <Text color={theme.colors.text.muted} style={{ width: 90 }}>

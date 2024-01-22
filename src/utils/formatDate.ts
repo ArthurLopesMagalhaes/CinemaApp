@@ -1,5 +1,3 @@
 export const formatDate = (date: string) => {
-  return `${date.split("T")[0].split("-").reverse().join("/")} - ${date
-    .split("T")[1]
-    .slice(0, 5)}`;
+  return `${date.slice(0, 10).split("-").reverse().join("-")}`;
 };
