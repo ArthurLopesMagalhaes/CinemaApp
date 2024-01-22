@@ -26,7 +26,7 @@ export const MovieCard = ({ data }: MovieCardProps) => {
       onPress={() => navigation.navigate("AboutMovie", { movieId: data.id })}
     >
       <MovieRating>
-        <Text>9.1</Text>
+        <Text>{data.rating || "-"}</Text>
       </MovieRating>
       <MovieImage
         style={{ width: MOVIE_WIDTH }}
