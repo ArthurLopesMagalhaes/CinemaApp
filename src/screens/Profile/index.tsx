@@ -13,6 +13,7 @@ import Sad from "@assets/lottie/sad.json";
 
 import { Container, Content, Footer, ScanButton } from "./styles";
 
+import { DetachedModal } from "@components/DetachedModal";
 import { Divider } from "@components/Divider";
 import { EmptyList } from "@components/EmptyList";
 import { Text } from "@components/Text";
@@ -43,12 +44,12 @@ export type TicketType = {
 
 export const Profile = () => {
   const { hasPermission, requestPermission } = useCameraPermission();
-
   const navigation = useNavigation();
   const user = useUserStore((state) => state.user);
   const clearUser = useUserStore((state) => state.clearUser);
   const clearSession = useSessionStore((state) => state.clearSession);
 
+  const [modalVisible, setModalVisible] = useState(false);
   const [tickets, setTickets] = useState<TicketType[] | null>(null);
 
   const goBack = () => {
@@ -107,7 +108,7 @@ export const Profile = () => {
         leftIcon={BackSvg}
         rightIcon={LogoutSvg}
         onLeftIconPress={goBack}
-        onRightIconPress={signOutUser}
+        onRightIconPress={() => setModalVisible(true)}
       />
       <Content>
         <Text size={22} weight="Bold">
@@ -149,6 +150,7 @@ export const Profile = () => {
           ItemSeparatorComponent={() => <Divider top={12} />}
         />
       </Content>
+
       {user.function === "admin" && (
         <Footer>
           <ScanButton onPress={handleQrCodeScanPress}>
@@ -156,6 +158,11 @@ export const Profile = () => {
           </ScanButton>
         </Footer>
       )}
+      <DetachedModal
+        onConfirm={signOutUser}
+        onCancel={() => setModalVisible(false)}
+        visible={modalVisible}
+      />
     </Container>
   );
 };
