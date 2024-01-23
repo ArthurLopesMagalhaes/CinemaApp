@@ -22,7 +22,7 @@ export const Header = ({ onButtonPress, userLogged }: HeaderProps) => {
   return (
     <Container>
       <ImageBox>
-        <Image source={Logo} style={{ width: 33, height: 37 }} />
+        <Image source={Logo} style={{ width: 40, height: 40 }} />
       </ImageBox>
       <LocationBox>
         <LocationSvg width={20} />
