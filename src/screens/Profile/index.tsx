@@ -16,6 +16,7 @@ import { Container, Content, Footer, ScanButton } from "./styles";
 import { DetachedModal } from "@components/DetachedModal";
 import { Divider } from "@components/Divider";
 import { EmptyList } from "@components/EmptyList";
+import { Loading } from "@components/Loading";
 import { Text } from "@components/Text";
 import { TopBar } from "@components/TopBar";
 
@@ -49,6 +50,7 @@ export const Profile = () => {
   const clearUser = useUserStore((state) => state.clearUser);
   const clearSession = useSessionStore((state) => state.clearSession);
 
+  const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [tickets, setTickets] = useState<TicketType[] | null>(null);
 
@@ -88,6 +90,7 @@ export const Profile = () => {
   const getUserTickets = async () => {
     const response = await cineAPI.getTickets(user.id);
     setTickets(response.data);
+    setLoading(false);
   };
 
   const handleQrCodeScanPress = () => {
@@ -116,39 +119,43 @@ export const Profile = () => {
         </Text>
 
         <Divider top={20} />
-        <FlatList
-          data={tickets}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ flex: 1 }}
-          ListEmptyComponent={
-            <EmptyList text="No tickets yet">
-              <LottieView
-                source={Sad}
-                autoPlay
-                loop
-                style={{
-                  width: "100%",
-                  height: 200,
-                }}
+        {loading ? (
+          <Loading />
+        ) : (
+          <FlatList
+            data={tickets}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ flex: 1 }}
+            ListEmptyComponent={
+              <EmptyList text="No tickets yet">
+                <LottieView
+                  source={Sad}
+                  autoPlay
+                  loop
+                  style={{
+                    width: "100%",
+                    height: 200,
+                  }}
+                />
+              </EmptyList>
+            }
+            renderItem={({ item, index }) => (
+              <TicketListItem
+                data={item}
+                onPress={() =>
+                  goToTicketScreen(
+                    item.id,
+                    item.sessions!.date_and_time,
+                    item.seat_position,
+                    item.ticket_type,
+                  )
+                }
               />
-            </EmptyList>
-          }
-          renderItem={({ item, index }) => (
-            <TicketListItem
-              data={item}
-              onPress={() =>
-                goToTicketScreen(
-                  item.id,
-                  item.sessions!.date_and_time,
-                  item.seat_position,
-                  item.ticket_type,
-                )
-              }
-            />
-          )}
-          ItemSeparatorComponent={() => <Divider top={12} />}
-        />
+            )}
+            ItemSeparatorComponent={() => <Divider top={12} />}
+          />
+        )}
       </Content>
 
       {user.function === "admin" && (
