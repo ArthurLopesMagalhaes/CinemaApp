@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   Camera,
@@ -10,14 +11,17 @@ import { Loading } from "@components/Loading";
 import { cineAPI } from "@services/api";
 
 export const CameraScan = () => {
+  const isMounted = useRef(false);
+
+  const [qrCode, setQrCode] = useState("");
+
   const device = useCameraDevice("back");
 
   const codeScanner = useCodeScanner({
     codeTypes: ["qr"],
     onCodeScanned: (codes) => {
-      console.log(`Code: ${codes[0].value}`);
       if (codes[0].value) {
-        updateStatus(codes[0].value);
+        setQrCode(codes[0].value);
       }
     },
   });
@@ -25,13 +29,25 @@ export const CameraScan = () => {
   const updateStatus = async (ticketId: string) => {
     try {
       const response = await cineAPI.updateTicketStatus(ticketId);
-      console.log(">", response);
+      if (response.error) {
+        return console.log("Invalid Ticket");
+      }
+      console.log("Ticket Updated");
     } catch (error) {
-      console.log(error);
+      console.log("Error", error);
     }
   };
 
   if (device == null) return <Loading />;
+
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
+
+    updateStatus(qrCode);
+  }, [qrCode]);
 
   return (
     <View style={{ flex: 1, backgroundColor: "red" }}>

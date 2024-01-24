@@ -11,12 +11,20 @@ import {
 import { Text } from "@components/Text";
 
 type Props = {
+  text?: string;
   visible: boolean;
-  onCancel: () => void;
-  onConfirm: () => void;
+  onCancel?: () => void;
+  onConfirm?: () => void;
+  children?: React.ReactNode;
 };
 
-export const DetachedModal = ({ visible, onCancel, onConfirm }: Props) => {
+export const DetachedModal = ({
+  text,
+  visible,
+  onCancel,
+  onConfirm,
+  children,
+}: Props) => {
   return (
     <Modal
       animationType="fade"
@@ -28,17 +36,20 @@ export const DetachedModal = ({ visible, onCancel, onConfirm }: Props) => {
       <Overlay activeOpacity={1} onPress={onCancel}>
         <TouchableWithoutFeedback>
           <ModalBody>
-            <Text weight="Regular" size={18}>
-              Are you sure you want to logout?
+            <Text weight="Regular" size={18} style={{ textAlign: "center" }}>
+              {text}
             </Text>
-            <ButtonsContainer>
-              <ConfirmButton onPress={onConfirm}>
-                <Text size={16}>Confirm</Text>
-              </ConfirmButton>
-              <CancelButton onPress={onCancel}>
-                <Text size={16}>Cancel</Text>
-              </CancelButton>
-            </ButtonsContainer>
+            {children}
+            {(onCancel || onConfirm) && (
+              <ButtonsContainer>
+                <ConfirmButton onPress={onConfirm}>
+                  <Text size={16}>Confirm</Text>
+                </ConfirmButton>
+                <CancelButton onPress={onCancel}>
+                  <Text size={16}>Cancel</Text>
+                </CancelButton>
+              </ButtonsContainer>
+            )}
           </ModalBody>
         </TouchableWithoutFeedback>
       </Overlay>

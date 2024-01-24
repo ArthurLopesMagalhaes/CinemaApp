@@ -4,12 +4,12 @@ import { useCameraPermission } from "react-native-vision-camera";
 
 import LottieView from "lottie-react-native";
 
-// import { QrCode } from "phosphor-react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import BackSvg from "@assets/back.svg";
 import LogoutSvg from "@assets/logout.svg";
 import Sad from "@assets/lottie/sad.json";
+import QrCodeSvg from "@assets/qrcode.svg";
 
 import { Container, Content, Footer, ScanButton } from "./styles";
 
@@ -126,7 +126,6 @@ export const Profile = () => {
             data={tickets}
             keyExtractor={(item) => item.id}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ flex: 1 }}
             ListEmptyComponent={
               <EmptyList text="No tickets yet">
                 <LottieView
@@ -161,11 +160,12 @@ export const Profile = () => {
       {user.function === "admin" && (
         <Footer>
           <ScanButton onPress={handleQrCodeScanPress}>
-            {/* <QrCode color="#ffff" size={40} /> */}
+            <QrCodeSvg height={30} width={30} />
           </ScanButton>
         </Footer>
       )}
       <DetachedModal
+        text="Are you sure you want to logout?"
         onConfirm={signOutUser}
         onCancel={() => setModalVisible(false)}
         visible={modalVisible}

@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { Alert, View } from "react-native";
 
+import LottieView from "lottie-react-native";
 import { useTheme } from "styled-components";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import BackSvg from "@assets/back.svg";
+import Confirmed from "@assets/lottie/confirmed.json";
 
 import { BottomInfo, Container, Footer, Row, TopInfo } from "./styles";
 
 import { Button } from "@components/Button";
+import { DetachedModal } from "@components/DetachedModal";
 import { TearLine } from "@components/TearLine";
 import { Text } from "@components/Text";
 import { TopBar } from "@components/TopBar";
@@ -37,6 +40,7 @@ export const Cart = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const theme = useTheme();
+  const [modalVisible, setModalVisible] = useState(true);
   const cart = useCartStore((state) => state.cart);
   const movie = useMovieStore((state) => state.movie);
   const user = useUserStore((state) => state.user);
@@ -48,6 +52,13 @@ export const Cart = () => {
 
   const goBack = () => {
     navigation.goBack();
+  };
+
+  const goHome = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Home" }],
+    });
   };
 
   const updateSession = async () => {
@@ -87,6 +98,7 @@ export const Cart = () => {
   };
 
   const openPaymentSheet = async () => {
+    await initializePaymentSheet();
     const { error } = await presentPaymentSheet();
 
     if (error) {
@@ -104,13 +116,9 @@ export const Cart = () => {
         })),
       );
       updateSession();
-      Alert.alert("Success", "Your order is confirmed!");
+      setModalVisible(true);
     }
   };
-
-  useEffect(() => {
-    initializePaymentSheet();
-  }, []);
 
   return (
     <Container>
@@ -165,6 +173,21 @@ export const Cart = () => {
       <Footer>
         <Button label="Continue" onPress={openPaymentSheet} />
       </Footer>
+      <DetachedModal text="Your order is complete!" visible={modalVisible}>
+        <LottieView
+          source={Confirmed}
+          autoPlay
+          loop={false}
+          onAnimationFinish={() => {
+            setModalVisible(false);
+            goHome();
+          }}
+          style={{
+            width: "100%",
+            height: 200,
+          }}
+        />
+      </DetachedModal>
     </Container>
   );
 };

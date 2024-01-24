@@ -114,5 +114,6 @@ export const cineAPI = {
       .update({ status: "closed" })
       .eq("id", ticketId)
       .select();
+    return { data, error };
   },
 };

@@ -8,6 +8,7 @@ export type Movie = {
   title: string;
   genres: string[];
   image_url: string;
+  rating: number;
 };
 
 type MovieListProps = {
