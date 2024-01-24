@@ -36,9 +36,11 @@ export const DetachedModal = ({
       <Overlay activeOpacity={1} onPress={onCancel}>
         <TouchableWithoutFeedback>
           <ModalBody>
-            <Text weight="Regular" size={18} style={{ textAlign: "center" }}>
-              {text}
-            </Text>
+            {text && (
+              <Text weight="Regular" size={18} style={{ textAlign: "center" }}>
+                {text}
+              </Text>
+            )}
             {children}
             {(onCancel || onConfirm) && (
               <ButtonsContainer>

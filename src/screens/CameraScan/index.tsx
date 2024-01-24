@@ -10,8 +10,13 @@ import { Loading } from "@components/Loading";
 
 import { cineAPI } from "@services/api";
 
+import { ConfirmedTicketModal } from "./components/ConfirmedTicketModal";
+import { InvalidTicketModal } from "./components/InvalidTicketModal";
+
 export const CameraScan = () => {
   const isMounted = useRef(false);
+  const [isDeniedModalVisible, setIsDeniedModalVisible] = useState(false);
+  const [isConfirmedModalVisible, setIsConfirmedModalVisible] = useState(false);
 
   const [qrCode, setQrCode] = useState("");
 
@@ -29,10 +34,17 @@ export const CameraScan = () => {
   const updateStatus = async (ticketId: string) => {
     try {
       const response = await cineAPI.updateTicketStatus(ticketId);
-      if (response.error) {
-        return console.log("Invalid Ticket");
+
+      if (response.data) {
+        if (response.data.length > 0) {
+          console.log("Ticket Updated", response.data);
+          setIsConfirmedModalVisible(true);
+          return;
+        }
       }
-      console.log("Ticket Updated");
+      console.log("Invalid Ticket", response.error);
+      setIsDeniedModalVisible(true);
+      return;
     } catch (error) {
       console.log("Error", error);
     }
@@ -56,6 +68,14 @@ export const CameraScan = () => {
         device={device}
         isActive={true}
         codeScanner={codeScanner}
+      />
+      <InvalidTicketModal
+        visible={isDeniedModalVisible}
+        onAnimationFinish={() => setIsDeniedModalVisible(false)}
+      />
+      <ConfirmedTicketModal
+        visible={isConfirmedModalVisible}
+        onAnimationFinish={() => setIsConfirmedModalVisible(false)}
       />
     </View>
   );

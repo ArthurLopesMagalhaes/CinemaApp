@@ -40,7 +40,7 @@ export const Cart = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const theme = useTheme();
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const cart = useCartStore((state) => state.cart);
   const movie = useMovieStore((state) => state.movie);
   const user = useUserStore((state) => state.user);

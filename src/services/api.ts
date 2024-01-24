@@ -112,6 +112,7 @@ export const cineAPI = {
     const { data, error } = await supabase
       .from("tickets")
       .update({ status: "closed" })
+      .eq("status", "active")
       .eq("id", ticketId)
       .select();
     return { data, error };
