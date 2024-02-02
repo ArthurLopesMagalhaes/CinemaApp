@@ -77,7 +77,7 @@ export const Cart = () => {
     const { paymentIntent, ephemeralKey, customer, publishableKey } =
       await StripeAPI.fetchPaymentSheetParams(
         calculateCartAmountPrice(cart.tickets) * 100, // Stripe method (has to be in cents)
-        "eren@gmai.com",
+        user.email!,
       );
 
     const { error } = await initPaymentSheet({
@@ -92,31 +92,37 @@ export const Cart = () => {
         },
       },
     });
-    if (!error) {
-      setLoading(true);
+    if (error) {
+      Alert.alert(`Error code: ${error.code}`, error.message);
     }
   };
 
   const openPaymentSheet = async () => {
-    await initializePaymentSheet();
-    const { error } = await presentPaymentSheet();
+    setLoading(true);
+    try {
+      await initializePaymentSheet();
+      const { error } = await presentPaymentSheet();
 
-    if (error) {
-      Alert.alert(`Error code: ${error.code}`, error.message);
-    } else {
-      const responseOrder = await cineAPI.createOrder(user.id);
-      const responseTicket = await cineAPI.createTicket(
-        cart.tickets.map((ticket) => ({
-          movie_id: movie.id,
-          user_id: user.id,
-          seat_position: ticket.id,
-          ticket_type: ticket.type,
-          order_id: responseOrder.data![0].id,
-          session_id: sessionData.id,
-        })),
-      );
-      updateSession();
-      setModalVisible(true);
+      if (error) {
+        Alert.alert(`Error code: ${error.code}`, error.message);
+      } else {
+        const responseOrder = await cineAPI.createOrder(user.id);
+        const responseTicket = await cineAPI.createTicket(
+          cart.tickets.map((ticket) => ({
+            movie_id: movie.id,
+            user_id: user.id,
+            seat_position: ticket.id,
+            ticket_type: ticket.type,
+            order_id: responseOrder.data![0].id,
+            session_id: sessionData.id,
+          })),
+        );
+        updateSession();
+        setModalVisible(true);
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -171,7 +177,12 @@ export const Cart = () => {
       </BottomInfo>
       <TearLine />
       <Footer>
-        <Button label="Continue" onPress={openPaymentSheet} />
+        <Button
+          label="Continue"
+          onPress={openPaymentSheet}
+          loading={loading}
+          disabled={loading}
+        />
       </Footer>
       <DetachedModal text="Your order is complete!" visible={modalVisible}>
         <LottieView
