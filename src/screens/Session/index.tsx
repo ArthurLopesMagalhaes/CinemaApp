@@ -17,6 +17,7 @@ import {
 
 import { Button } from "@components/Button";
 import { Divider } from "@components/Divider";
+import { EmptyList } from "@components/EmptyList";
 import { Loading } from "@components/Loading";
 import { Text } from "@components/Text";
 import { TopBar } from "@components/TopBar";
@@ -133,14 +134,23 @@ export const Session = () => {
         </DateAndTimeBox>
       </TopFixed>
       <Bottom>
-        <SeatsLegendBox />
-        <SeatsMap
-          sessionId={selectedSession.id}
-          seatsArrangement={whichSeatsArrangement(sessions, selectedSession.id)}
-          onSeatPress={onSeatPress}
-        />
+        {!selectedSession.id ? (
+          <EmptyList text="Please, select a session above." />
+        ) : (
+          <>
+            <SeatsLegendBox />
+            <SeatsMap
+              sessionId={selectedSession.id}
+              seatsArrangement={whichSeatsArrangement(
+                sessions,
+                selectedSession.id,
+              )}
+              onSeatPress={onSeatPress}
+            />
+          </>
+        )}
       </Bottom>
-      {cart.tickets.length > 0 && (
+      {cart.tickets.length > 0 && selectedSession.id === cart.sessionId && (
         <ButtonWrapper>
           <Button label="Buy tickets" onPress={goToCheckout} />
         </ButtonWrapper>

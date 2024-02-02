@@ -76,7 +76,8 @@ export const Cart = () => {
   const initializePaymentSheet = async () => {
     const { paymentIntent, ephemeralKey, customer, publishableKey } =
       await StripeAPI.fetchPaymentSheetParams(
-        calculateCartAmountPrice(cart.tickets) * 100, // Stripe method (has to be in cents)
+        50,
+        // calculateCartAmountPrice(cart.tickets) * 100, // Stripe method (has to be in cents)
         user.email!,
       );
 
@@ -126,6 +127,7 @@ export const Cart = () => {
     }
   };
 
+  console.log(cart.tickets);
   return (
     <Container>
       <TopBar title="Cart" leftIcon={BackSvg} onLeftIconPress={goBack} />
@@ -168,7 +170,7 @@ export const Cart = () => {
             weight="Medium"
             size={16}
           >
-            1x Adult
+            Total
           </Text>
           <Text weight="Medium" size={16}>
             R$ {calculateCartAmountPrice(cart.tickets)}

@@ -32,7 +32,7 @@ type RouteParams = {
   movieId: string;
 };
 
-type MovieData = Database["public"]["Tables"]["movies"]["Row"];
+export type MovieData = Database["public"]["Tables"]["movies"]["Row"];
 
 export const AboutMovie = () => {
   const route = useRoute();

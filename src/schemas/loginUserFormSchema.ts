@@ -5,5 +5,5 @@ export const loginUserFormSchema = z.object({
     .string()
     .min(1, "E-mail is required.")
     .email("Invalid format of e-mail."),
-  password: z.string().min(6, "Minimum length is 6 characters."),
+  password: z.string().min(1, "Type your password."),
 });

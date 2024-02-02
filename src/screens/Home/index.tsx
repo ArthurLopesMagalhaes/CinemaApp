@@ -6,20 +6,19 @@ import { Container, Content } from "./styles";
 
 import { Divider } from "@components/Divider";
 import { Header } from "@components/Header";
+import { Loading } from "@components/Loading";
 import { Movie, MovieList } from "@components/MovieList";
 import { Text } from "@components/Text";
 
 import { cineAPI } from "@services/api";
 
 import { useSessionStore } from "@stores/session";
-import { useUserStore } from "@stores/user";
 
 export const Home = () => {
   const navigation = useNavigation();
-  const user = useUserStore((state) => state.user);
   const session = useSessionStore((state) => state.session);
-  const setUser = useUserStore((state) => state.setUser);
 
+  const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState<Movie[]>([]);
 
   const goToProfile = () => {
@@ -31,6 +30,7 @@ export const Home = () => {
     if (data.movies) {
       setMovies(data.movies);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export const Home = () => {
           Now in cinemas
         </Text>
         <Divider top={16} />
-        <MovieList data={movies} />
+        {loading ? <Loading /> : <MovieList data={movies} />}
       </Content>
     </Container>
   );

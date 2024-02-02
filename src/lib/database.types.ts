@@ -18,7 +18,7 @@ export interface Database {
           genres: string[];
           id: string;
           image_url: string;
-          rating: number | null;
+          rating: number;
           runtime: string;
           title: string;
         };
@@ -30,7 +30,7 @@ export interface Database {
           genres: string[];
           id?: string;
           image_url: string;
-          rating?: number | null;
+          rating?: number;
           runtime?: string;
           title: string;
         };
@@ -42,7 +42,7 @@ export interface Database {
           genres?: string[];
           id?: string;
           image_url?: string;
-          rating?: number | null;
+          rating?: number;
           runtime?: string;
           title?: string;
         };
