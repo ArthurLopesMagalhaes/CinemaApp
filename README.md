@@ -4,6 +4,13 @@
 
 O Cinema App é um aplicativo desenvolvido em React Native que facilita a compra de ingressos para cinema. Com uma interface intuitiva e amigável, os usuários podem escolher o filme desejado, a sessão preferida e os assentos disponíveis. Além disso, se o usuário tiver a função de administrador, ele pode realizar a validação do ingresso na entrada do cinema por meio de um scanner de QR Code.
 
+## Sumário
+
+1. [Pré requisitos](#pré-requisitos)
+2. [Capturas de Tela](#capturas-de-tela)
+3. [Vídeo Demonstrativo](#vídeo-demonstrativo)
+4. [Rodando o projeto](#rodando-o-projeto)
+
 ## Capturas de tela
 
 <div style="display:flex;gap:5px">
@@ -24,14 +31,6 @@ https://github.com/ArthurLopesMagalhaes/CinemaApp/assets/89086128/ebe51f22-5d49-
 https://github.com/ArthurLopesMagalhaes/CinemaApp/assets/89086128/4daf0901-7c1f-4459-ab2f-7ffab57738c0
 
 
-
-
-## Sumário
-
-1. [Pré requisitos](#pré-requisitos)
-2. [Capturas de Tela](#capturas-de-tela)
-3. [Vídeo Demonstrativo](#vídeo-demonstrativo)
-4. [Rodando o projeto](#rodando-o-projeto)
 
 ## Recursos Principais
 
