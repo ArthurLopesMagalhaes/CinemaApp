@@ -36,8 +36,6 @@ https://github.com/ArthurLopesMagalhaes/CinemaApp/assets/89086128/4daf0901-7c1f-
 
 - **Compra de Ingressos**: Os usuários podem navegar pelos filmes em exibição, escolher a sessão desejada e selecionar os assentos disponíveis para compra.
 
-- **Administração de Sessões**: Os administradores têm acesso a uma interface especial que permite gerenciar as sessões, adicionar novos filmes e configurar horários.
-
 - **Validação de Ingresso**: Administradores podem utilizar a funcionalidade de scanner de QR Code para validar os ingressos na entrada do cinema.
 
 - **Integração com Supabase**: O aplicativo utiliza o Supabase como backend para armazenar informações sobre filmes, sessões e usuários.
