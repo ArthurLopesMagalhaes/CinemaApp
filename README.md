@@ -4,7 +4,14 @@
 
 O Cinema App é um aplicativo desenvolvido em React Native que facilita a compra de ingressos para cinema. Com uma interface intuitiva e amigável, os usuários podem escolher o filme desejado, a sessão preferida e os assentos disponíveis. Além disso, se o usuário tiver a função de administrador, ele pode realizar a validação do ingresso na entrada do cinema por meio de um scanner de QR Code.
 
-## Screenshots
+## Sumário
+
+1. [Pré requisitos](#pré-requisitos)
+2. [Capturas de Tela](#capturas-de-tela)
+3. [Vídeo Demonstrativo](#vídeo-demonstrativo)
+4. [Rodando o projeto](#rodando-o-projeto)
+
+## Capturas de tela
 
 <div style="display:flex;gap:5px">
   <img src="./screenshots/Screenshot_1.png" alt="Screenshot 1" width="300"/>
@@ -16,19 +23,18 @@ O Cinema App é um aplicativo desenvolvido em React Native que facilita a compra
   <img src="./screenshots/Screenshot_7.png" alt="Screenshot 1" width="300"/>
 </div>
 
-## Sumário
+## Vídeo demonstrativo
 
-1. [Pré requisitos](#pré-requisitos)
-2. [Rodando o projeto](#rodando-o-projeto)
+https://github.com/ArthurLopesMagalhaes/CinemaApp/assets/89086128/ebe51f22-5d49-4fda-926d-23df8b23aa40
 
-3. [Capturas de Tela](#capturas-de-tela)
-4. [Vídeo Demonstrativo](#vídeo-demonstrativo)
+
+https://github.com/ArthurLopesMagalhaes/CinemaApp/assets/89086128/4daf0901-7c1f-4459-ab2f-7ffab57738c0
+
+
 
 ## Recursos Principais
 
 - **Compra de Ingressos**: Os usuários podem navegar pelos filmes em exibição, escolher a sessão desejada e selecionar os assentos disponíveis para compra.
-
-- **Administração de Sessões**: Os administradores têm acesso a uma interface especial que permite gerenciar as sessões, adicionar novos filmes e configurar horários.
 
 - **Validação de Ingresso**: Administradores podem utilizar a funcionalidade de scanner de QR Code para validar os ingressos na entrada do cinema.
 
