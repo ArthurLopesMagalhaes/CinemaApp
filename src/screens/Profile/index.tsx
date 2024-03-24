@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, FlatList, View } from "react-native";
+import { Alert, FlatList, TouchableWithoutFeedback, View } from "react-native";
 import { useCameraPermission } from "react-native-vision-camera";
 
 import LottieView from "lottie-react-native";
@@ -23,6 +23,7 @@ import { TopBar } from "@components/TopBar";
 import { cineAPI } from "@services/api";
 import { supabase } from "@services/supabase";
 
+import { Filter, FilterType } from "./components/Filter";
 import { TicketListItem } from "./components/TicketListItem";
 
 import { useSessionStore } from "@stores/session";
@@ -51,7 +52,9 @@ export const Profile = () => {
   const clearSession = useSessionStore((state) => state.clearSession);
 
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState<FilterType>("active");
   const [modalVisible, setModalVisible] = useState(false);
+  const [filterMenuVisible, setFilterMenuVisible] = useState(false);
   const [tickets, setTickets] = useState<TicketType[] | null>(null);
 
   const goBack = () => {
@@ -63,6 +66,7 @@ export const Profile = () => {
     date: string,
     seat: string,
     type: string,
+    movieTitle: string,
   ) => {
     navigation.navigate("Ticket", {
       ticketInfo: {
@@ -70,6 +74,7 @@ export const Profile = () => {
         date,
         seat,
         type,
+        movieTitle,
       },
     });
   };
@@ -87,8 +92,13 @@ export const Profile = () => {
     clearSession();
   };
 
+  const onFilterOptionPress = (filterOption: FilterType) => {
+    setFilter(filterOption);
+    setFilterMenuVisible(false);
+  };
+
   const getUserTickets = async () => {
-    const response = await cineAPI.getTickets(user.id);
+    const response = await cineAPI.getTickets(user.id, filter);
     setTickets(response.data);
     setLoading(false);
   };
@@ -102,74 +112,92 @@ export const Profile = () => {
 
   useEffect(() => {
     getUserTickets();
-  }, []);
+  }, [filter]);
 
   return (
-    <Container>
-      <TopBar
-        title="Profile"
-        leftIcon={BackSvg}
-        rightIcon={LogoutSvg}
-        onLeftIconPress={goBack}
-        onRightIconPress={() => setModalVisible(true)}
-      />
-      <Content>
-        <Text size={22} weight="Bold">
-          Welcome, {user.name} 👋
-        </Text>
+    <TouchableWithoutFeedback
+      style={{ flex: 1 }}
+      onPressIn={() => setFilterMenuVisible(false)}
+    >
+      <Container>
+        <TopBar
+          title="Profile"
+          leftIcon={BackSvg}
+          rightIcon={LogoutSvg}
+          onLeftIconPress={goBack}
+          onRightIconPress={() => setModalVisible(true)}
+        />
+        <Content>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text size={22} weight="Bold">
+              Welcome, {user.name} 👋
+            </Text>
+            <Filter
+              onOptionPress={onFilterOptionPress}
+              filterMenuVisible={filterMenuVisible}
+              setFilterMenuVisible={setFilterMenuVisible}
+            />
+          </View>
 
-        <Divider top={20} />
-        {loading ? (
-          <Loading />
-        ) : (
-          <FlatList
-            data={tickets}
-            keyExtractor={(item) => item.id}
-            showsVerticalScrollIndicator={false}
-            ListEmptyComponent={
-              <EmptyList text="No tickets yet">
-                <LottieView
-                  source={Sad}
-                  autoPlay
-                  loop
-                  style={{
-                    width: "100%",
-                    height: 200,
-                  }}
+          <Divider top={20} />
+          {loading ? (
+            <Loading />
+          ) : (
+            <FlatList
+              data={tickets}
+              keyExtractor={(item) => item.id}
+              showsVerticalScrollIndicator={false}
+              ListEmptyComponent={
+                <EmptyList text="No tickets here.">
+                  <LottieView
+                    source={Sad}
+                    autoPlay
+                    loop
+                    style={{
+                      width: "100%",
+                      height: 200,
+                    }}
+                  />
+                </EmptyList>
+              }
+              renderItem={({ item, index }) => (
+                <TicketListItem
+                  data={item}
+                  onPress={() =>
+                    goToTicketScreen(
+                      item.id,
+                      item.sessions!.date_and_time,
+                      item.seat_position,
+                      item.ticket_type,
+                      item.movies!.title,
+                    )
+                  }
                 />
-              </EmptyList>
-            }
-            renderItem={({ item, index }) => (
-              <TicketListItem
-                data={item}
-                onPress={() =>
-                  goToTicketScreen(
-                    item.id,
-                    item.sessions!.date_and_time,
-                    item.seat_position,
-                    item.ticket_type,
-                  )
-                }
-              />
-            )}
-            ItemSeparatorComponent={() => <Divider top={12} />}
-          />
-        )}
-      </Content>
+              )}
+              ItemSeparatorComponent={() => <Divider top={12} />}
+            />
+          )}
+        </Content>
 
-      {user.function === "admin" && (
-        <Footer>
-          <ScanButton onPress={handleQrCodeScanPress}>
-            <QrCodeSvg height={30} width={30} />
-          </ScanButton>
-        </Footer>
-      )}
-      <DetachedModal
-        text="Are you sure you want to logout?"
-        onConfirm={signOutUser}
-        onCancel={() => setModalVisible(false)}
-        visible={modalVisible}
-      />
-    </Container>
+        {user.function === "admin" && (
+          <Footer>
+            <ScanButton onPress={handleQrCodeScanPress}>
+              <QrCodeSvg height={30} width={30} />
+            </ScanButton>
+          </Footer>
+        )}
+        <DetachedModal
+          text="Are you sure you want to logout?"
+          onConfirm={signOutUser}
+          onCancel={() => setModalVisible(false)}
+          visible={modalVisible}
+        />
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };

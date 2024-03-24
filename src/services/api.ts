@@ -89,7 +89,7 @@ export const cineAPI = {
 
     return { data, error };
   },
-  getTickets: async (userId: string) => {
+  getTickets: async (userId: string, status?: string) => {
     const { data, error } = await supabase
       .from("tickets")
       .select(
@@ -105,7 +105,8 @@ export const cineAPI = {
     `,
       )
       .order("status", { ascending: true })
-      .eq("user_id", userId);
+      .eq("user_id", userId)
+      .eq("status", status);
     return { data, error };
   },
   updateTicketStatus: async (ticketId: string) => {
