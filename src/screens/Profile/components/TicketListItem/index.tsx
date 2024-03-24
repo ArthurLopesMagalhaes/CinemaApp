@@ -39,7 +39,7 @@ export const TicketListItem = ({ data, onPress }: TicketListItemType) => {
           </Text>
         </InfoBoxTop>
         <InfoBoxBottom>
-          <Text>{formatDateAndTime(data.sessions.date_and_time)}</Text>
+          <Text>{formatDateAndTime(data.sessions!.date_and_time)}</Text>
           <Text>
             {data.seat_position} - {data.ticket_type}
           </Text>

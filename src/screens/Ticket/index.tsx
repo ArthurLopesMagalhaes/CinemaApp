@@ -28,6 +28,7 @@ export type TicketInfo = {
   date: string;
   seat: string;
   type: string;
+  movieTitle: string;
 };
 
 type RouteParams = {
@@ -68,7 +69,7 @@ export const Ticket = () => {
       <BottomView>
         <TicketInfos>
           <Text weight="Bold" size={18}>
-            The Batman
+            {ticketInfo.movieTitle}
           </Text>
           <Divider top={16} />
 

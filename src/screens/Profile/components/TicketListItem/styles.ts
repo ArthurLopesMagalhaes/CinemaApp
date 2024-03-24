@@ -17,6 +17,7 @@ export const Container = styled.TouchableOpacity`
 export const Overlay = styled.View<OverlayProps>`
   background-color: ${(props) => props.overlay && "rgba(0,0,0,0.6)"};
   position: absolute;
+  border-radius: 8px;
   left: 0;
   right: 0;
   top: 0;

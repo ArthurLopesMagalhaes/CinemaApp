@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Alert, View } from "react-native";
 
 import LottieView from "lottie-react-native";
@@ -105,29 +105,27 @@ export const Cart = () => {
       const { error } = await presentPaymentSheet();
 
       if (error) {
-        Alert.alert(`Error code: ${error.code}`, error.message);
-      } else {
-        const responseOrder = await cineAPI.createOrder(user.id);
-        const responseTicket = await cineAPI.createTicket(
-          cart.tickets.map((ticket) => ({
-            movie_id: movie.id,
-            user_id: user.id,
-            seat_position: ticket.id,
-            ticket_type: ticket.type,
-            order_id: responseOrder.data![0].id,
-            session_id: sessionData.id,
-          })),
-        );
-        updateSession();
-        setModalVisible(true);
+        return Alert.alert(`Error code: ${error.code}`, error.message);
       }
+      const responseOrder = await cineAPI.createOrder(user.id);
+      const responseTicket = await cineAPI.createTicket(
+        cart.tickets.map((ticket) => ({
+          movie_id: movie.id,
+          user_id: user.id,
+          seat_position: ticket.id,
+          ticket_type: ticket.type,
+          order_id: responseOrder.data![0].id,
+          session_id: sessionData.id,
+        })),
+      );
+      updateSession();
+      setModalVisible(true);
     } catch (error) {
     } finally {
       setLoading(false);
     }
   };
 
-  console.log(cart.tickets);
   return (
     <Container>
       <TopBar title="Cart" leftIcon={BackSvg} onLeftIconPress={goBack} />
