@@ -31,7 +31,7 @@ export const CameraScan = () => {
     },
   });
 
-  const updateStatus = async (ticketId: string) => {
+  const updateTicketStatus = async (ticketId: string) => {
     try {
       const response = await cineAPI.updateTicketStatus(ticketId);
 
@@ -58,7 +58,7 @@ export const CameraScan = () => {
       return;
     }
 
-    updateStatus(qrCode);
+    updateTicketStatus(qrCode);
   }, [qrCode]);
 
   return (

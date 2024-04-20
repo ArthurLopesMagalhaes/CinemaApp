@@ -1,6 +1,14 @@
-import { useEffect, useState } from "react";
-import { Alert, FlatList, TouchableWithoutFeedback, View } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import {
+  Alert,
+  AppState,
+  FlatList,
+  Linking,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { useCameraPermission } from "react-native-vision-camera";
+import { AppStateStatus } from "react-native/Libraries/AppState/AppState";
 
 import LottieView from "lottie-react-native";
 
@@ -26,6 +34,7 @@ import { supabase } from "@services/supabase";
 import { Filter, FilterType } from "./components/Filter";
 import { TicketListItem } from "./components/TicketListItem";
 
+import { useFirstTimeStore } from "@stores/firstTime";
 import { useSessionStore } from "@stores/session";
 import { useUserStore } from "@stores/user";
 
@@ -45,11 +54,15 @@ export type TicketType = {
 };
 
 export const Profile = () => {
+  const isPermissionFetching = useRef(false);
   const { hasPermission, requestPermission } = useCameraPermission();
   const navigation = useNavigation();
+
   const user = useUserStore((state) => state.user);
   const clearUser = useUserStore((state) => state.clearUser);
   const clearSession = useSessionStore((state) => state.clearSession);
+  const firstTime = useFirstTimeStore((state) => state.firstTime);
+  const setFirstTime = useFirstTimeStore((state) => state.setFirstTime);
 
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<FilterType>("active");
@@ -104,11 +117,47 @@ export const Profile = () => {
   };
 
   const handleQrCodeScanPress = () => {
-    if (!hasPermission) {
+    if (!hasPermission && firstTime) {
+      setFirstTime(false);
       return requestPermission();
+    }
+    if (!hasPermission) {
+      return Alert.alert(
+        "Camera Permission",
+        "You need to enable camera permission to scan QR code",
+        [
+          {
+            text: "Cancel",
+            style: "cancel",
+          },
+          {
+            text: "Open Settings",
+            onPress: () => Linking.openSettings(),
+          },
+        ],
+      );
     }
     navigation.navigate("CameraScan");
   };
+
+  const handlerAppStateChange = async (nextAppState: AppStateStatus) => {
+    if (nextAppState === "active" && !isPermissionFetching.current) {
+      isPermissionFetching.current = true;
+      await requestPermission();
+      isPermissionFetching.current = false;
+    }
+  };
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener(
+      "change",
+      handlerAppStateChange,
+    );
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   useEffect(() => {
     getUserTickets();
