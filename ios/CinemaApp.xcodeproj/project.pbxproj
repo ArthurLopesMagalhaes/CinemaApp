@@ -17,6 +17,7 @@
 		F3727DE28F1D4CF0B3A7E0F7 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E93BCD5E254C4A0F993E0599 /* SF-Pro-Display-Bold.otf */; };
 		E8EC121FDE0A49C38AB92B9E /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 45EA9F73259448A2B8D675AD /* SF-Pro-Display-Medium.otf */; };
 		C98CB900F28249BD8E340E69 /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DF4DD90A656C4F54AB9C4FCF /* SF-Pro-Display-Regular.otf */; };
+		787BF4FE050443B491D239A5 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D471F1E9A0A4270A9682440 /* BootSplash.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		E93BCD5E254C4A0F993E0599 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; name = "SF-Pro-Display-Bold.otf"; path = "../src/assets/fonts/SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		45EA9F73259448A2B8D675AD /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; name = "SF-Pro-Display-Medium.otf"; path = "../src/assets/fonts/SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		DF4DD90A656C4F54AB9C4FCF /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; name = "SF-Pro-Display-Regular.otf"; path = "../src/assets/fonts/SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0D471F1E9A0A4270A9682440 /* BootSplash.storyboard */ = {isa = PBXFileReference; name = "BootSplash.storyboard"; path = "CinemaApp/BootSplash.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				0D471F1E9A0A4270A9682440 /* BootSplash.storyboard */,
 			);
 			name = CinemaApp;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				F3727DE28F1D4CF0B3A7E0F7 /* SF-Pro-Display-Bold.otf in Resources */,
 				E8EC121FDE0A49C38AB92B9E /* SF-Pro-Display-Medium.otf in Resources */,
 				C98CB900F28249BD8E340E69 /* SF-Pro-Display-Regular.otf in Resources */,
+				787BF4FE050443B491D239A5 /* BootSplash.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
