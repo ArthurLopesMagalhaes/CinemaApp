@@ -15,7 +15,9 @@ const Stack = createNativeStackNavigator();
 
 export const StackRoutes = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false, animation: "fade_from_bottom" }}
+    >
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="SignUp" component={SignUp} />
