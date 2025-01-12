@@ -1,43 +1,39 @@
 # Cinema App
 
-## Descrição
+## Description
 
-O Cinema App é um aplicativo desenvolvido em React Native que facilita a compra de ingressos para cinema. Com uma interface intuitiva e amigável, os usuários podem escolher o filme desejado, a sessão preferida e os assentos disponíveis. Além disso, se o usuário tiver a função de administrador, ele pode realizar a validação do ingresso na entrada do cinema por meio de um scanner de QR Code.
+The Cinema App is a React Native application that simplifies the process of purchasing movie tickets. With an intuitive and user-friendly interface, users can select their desired movie, preferred session, and available seats. Additionally, if the user has admin privileges, they can validate tickets at the cinema entrance using a QR Code scanner.
 
-## Sumário
+## Table of Contents
 
-1. [Pré requisitos](#pré-requisitos)
-2. [Capturas de Tela](#capturas-de-tela)
-3. [Vídeo Demonstrativo](#vídeo-demonstrativo)
-4. [Rodando o projeto](#rodando-o-projeto)
+1. [Screenshots](#screenshots)
+2. [Demo Video](#demo-video)
+3. [Key Features](#key-features)
 
-## Capturas de tela
+## Screenshots
 
 <div style="display:flex;gap:5px">
   <img src="./screenshots/Screenshot_1.png" alt="Screenshot 1" width="300"/>
-  <img src="./screenshots/Screenshot_2.png" alt="Screenshot 1" width="300"/>
-  <img src="./screenshots/Screenshot_3.png" alt="Screenshot 1" width="300"/>
-  <img src="./screenshots/Screenshot_4.png" alt="Screenshot 1" width="300"/>
-  <img src="./screenshots/Screenshot_5.png" alt="Screenshot 1" width="300"/>
-  <img src="./screenshots/Screenshot_6.png" alt="Screenshot 1" width="300"/>
-  <img src="./screenshots/Screenshot_7.png" alt="Screenshot 1" width="300"/>
+  <img src="./screenshots/Screenshot_2.png" alt="Screenshot 2" width="300"/>
+  <img src="./screenshots/Screenshot_3.png" alt="Screenshot 3" width="300"/>
+  <img src="./screenshots/Screenshot_4.png" alt="Screenshot 4" width="300"/>
+  <img src="./screenshots/Screenshot_5.png" alt="Screenshot 5" width="300"/>
+  <img src="./screenshots/Screenshot_6.png" alt="Screenshot 6" width="300"/>
+  <img src="./screenshots/Screenshot_7.png" alt="Screenshot 7" width="300"/>
 </div>
 
-## Vídeo demonstrativo
+## Demo Video
 
 https://github.com/ArthurLopesMagalhaes/CinemaApp/assets/89086128/ebe51f22-5d49-4fda-926d-23df8b23aa40
 
-
 https://github.com/ArthurLopesMagalhaes/CinemaApp/assets/89086128/4daf0901-7c1f-4459-ab2f-7ffab57738c0
 
+## Key Features
 
+- **Ticket Purchase**: Users can browse currently showing movies, select their preferred session, and choose available seats for purchase.
 
-## Recursos Principais
+- **Ticket Validation**: Admins can use the QR Code scanner feature to validate tickets at the cinema entrance.
 
-- **Compra de Ingressos**: Os usuários podem navegar pelos filmes em exibição, escolher a sessão desejada e selecionar os assentos disponíveis para compra.
+- **Integration with Supabase**: The app uses Supabase as the backend to store information about movies, sessions, and users.
 
-- **Validação de Ingresso**: Administradores podem utilizar a funcionalidade de scanner de QR Code para validar os ingressos na entrada do cinema.
-
-- **Integração com Supabase**: O aplicativo utiliza o Supabase como backend para armazenar informações sobre filmes, sessões e usuários.
-
-- **Pagamentos com Stripe**: A integração com o Stripe permite pagamentos seguros e rápidos para a compra de ingressos.
+- **Payments with Stripe**: Integration with Stripe allows for secure and fast payment processing for ticket purchases.
