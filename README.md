@@ -4,12 +4,6 @@
 
 The Cinema App is a React Native application that simplifies the process of purchasing movie tickets. With an intuitive and user-friendly interface, users can select their desired movie, preferred session, and available seats. Additionally, if the user has admin privileges, they can validate tickets at the cinema entrance using a QR Code scanner.
 
-## Table of Contents
-
-1. [Screenshots](#screenshots)
-2. [Demo Video](#demo-video)
-3. [Key Features](#key-features)
-
 ## Screenshots
 
 <div style="display:flex;gap:5px">
